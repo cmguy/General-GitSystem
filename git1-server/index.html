@@ -1,0 +1,131 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+	<head>
+		<title>EM&M Git Repository System</title>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+		<style type="text/css">
+			body {
+				background-color: #fff;
+				color: #000;
+				font-size: 0.9em;
+				font-family: sans-serif,helvetica;
+				margin: 0;
+				padding: 0;
+			}
+			:link {
+				color: #0000FF;
+			}
+			:visited {
+				color: #0000FF;
+			}
+			a:hover {
+				color: #00FF00;
+			}
+			h1 {
+				text-align: center;
+				margin: 0;
+				padding: 0.6em 2em 0.4em;
+				background-color: #3399FF;
+				color: #ffffff;
+				font-weight: normal;
+				font-size: 1.75em;
+				border-bottom: 2px solid #000;
+			}
+			h1 strong {
+				font-weight: bold;
+			}
+			h2 {
+				font-size: 1.1em;
+				font-weight: bold;
+			}
+			.content {
+				padding: 1em 5em;
+			}
+			.content-columns {
+				/* Setting relative positioning allows for 
+				absolute positioning for sub-classes */
+				position: relative;
+				padding-top: 1em;
+			}
+			.content-column-left {
+				/* Value for IE/Win; will be overwritten for other browsers */
+				width: 47%;
+				padding-right: 3%;
+				float: left;
+				padding-bottom: 2em;
+			}
+			.content-column-right {
+				/* Values for IE/Win; will be overwritten for other browsers */
+				width: 47%;
+				padding-left: 3%;
+				float: left;
+				padding-bottom: 2em;
+			}
+			.content-columns>.content-column-left, .content-columns>.content-column-right {
+				/* Non-IE/Win */
+			}
+			img {
+				border: 2px solid #fff;
+				padding: 2px;
+				margin: 2px;
+			}
+			a:hover img {
+				border: 2px solid #3399FF;
+			}
+		</style>
+	</head>
+
+	<body>
+	<h1><a href="http://emm-git1.sys.comcast.net/git">EM&M Git1 Repository</a> <b><font color="#00FF00">Primary</font></b><br><font size="-1"><strong>powered by</font> Git, Apache, and CentOS</strong></h1>
+
+		<div class="content">
+			<div class="content-middle">
+				<p>Welcome to the Event Management & Mediation (EM&M) Repository System. This system is based on the <a href="http://git-scm.com">Git</a> distributed version control system. It is managed with <a href="http://gitolite.com/gitolite/index.html">Gitolite</a>.</p>
+			<p>This repository system encompasses two servers, this <b><font color="#00FF00">Primary</font></b> server and an <a href="http://emm-git2.sys.comcast.net/">EM&M Git2</a> <b><font color="#ff0000">fail-over</font></b> server.</p>
+			</div>
+<hr />
+			<div class="content-columns">
+				<div class="content-column-left">
+					<h2>If you are new to Git:</h2>
+
+					<p>The official Git site is <a href="http://git-scm.com">git-scm.com</a>. Another good source for Git usage and introductions is <a href="http://gitolite.com/index.html">Notes on Git</a>. Your EM&M Configuration Management team also maintains the <a href="https://wiki.io.comcast.net/pages/viewpage.action?pageId=227392710">EM&M Git Users Guide</a>. In order to deliver EM&M deployments, you'll need to follow this user guide.</p>
+					<h2>Deployment WorkFlow and Documentation</h2>
+					<p>The development work you do for EM&M is managed with Change Records (CR)s. These CRs come in the form of Service Requests (SR00NNNNNN) which are opened for production problems in a Remedy system, User Stories (USNNNNNN) which are managed in the Rally system, and legacy Change Records (CR-NNNN) which are managed with an EM&M Sharepoint site.</p>
+					<p>EM&M Git repos are application modules that are maintained by developers in development environments for promotion to all other EM&M environments (QA, Test labs, Production). These promotions are managed by the EM&M CM and EPA teams per instructions provided by development.</p>
+					<p>EM&M Deployments are managed by the <a href="http://tkts.sys.comcast.net/browse/CEMPCM">JIRA CEMPCM project</a> where CRs and Git repos are associated in the titles (summaries) of each JIRA CEMPCM project ticket. A <a href="http://tkts.sys.comcast.net/secure/Dashboard.jspa?selectPageId=15010">Dev Queue dashboard</a> is available for EM&M developers to manage their work.</p>
+					<p>A <a href="https://wiki.io.comcast.net/dashboard.action">Comcast wiki</a> maintained with <a href="https://www.atlassian.com/software/confluence">Confluence</a> is utilized for EM&M documentation. A <a href="https://wiki.io.comcast.net/display/CEMP/Home">EM&M CM Portal</a> is maintained to provide a view to all things Comcast EM&M including legacy cemp, Comcast services, and other documentation locations.</p>
+				</div>
+
+				<div class="content-column-right">
+					<h2>Support</h2>
+					<p>The EM&M Configuration Management (CM) team is your first line of support for this system. Here is their contact information:
+<table>
+<tr><th>Name/Email Link</th><th>Phone</th></tr>
+<tr><td><a href="mailto:abhilash_nair@cable.comcast.com?subject=Git%20Server%20Support&cc=BillingOperations_BuildRequests@cable.comcast.com">Abhilash Nair</a></td><td>720-267-2628</td></tr>
+<tr><td><a href="mailto:robert_sell@cable.comcast.com?subject=Git%20Server%20Support&cc=BillingOperations_BuildRequests@cable.comcast.com">Robert Sell</a></td><td>720-267-2666</td></tr>
+<tr><td><a href="mailto:andrew_wallace@cable.comcast.com?subject=Git%20Server%20Support&cc=BillingOperations_BuildRequests@cable.comcast.com">Andrew Wallace</a></td><td>720-267-2677</td></tr>
+<tr><td><a href="mailto:Bruce Woodcock@cable.comcast.com?subject=Git%20Server%20Support&cc=BillingOperations_BuildRequests@cable.comcast.com">Bruce Woodcock</a></td><td>720-267-2168</td></tr>
+</table> </p>
+
+				        <p><br></p>
+					<h2>Primary Software of this System</h2>
+
+					<p>For details of this EM&M system, refer to the <a href="https://wiki.io.comcast.net/display/CEMP/Git+Repo+System+Admin+Guide">Git Repo System Admin Guide</a>.</p>
+
+						<p>Following are links to the websites of the primary software installed on this system:</p>
+
+						<p><a href="http://git-scm.com"><img src="/icons/git-logo.png" alt="[Powered by Git]" width="88" height="31" /></a> <a href="https://git.wiki.kernel.org/index.php/Main_Page"><img src="/icons/gitweb-logo.png" alt="[Git Wiki]" width="45" height="71" /></a> <a href="http://httpd.apache.org/"><img src="/icons/apache_pb.gif" alt="[ Powered by Apache ]"/></a> <a href="http://www.centos.org/"><img src="/icons/poweredby.png" alt="[ Powered by CentOS Linux ]" width="88" height="31" /></a></p>
+				        <p><br></p>
+				</div>
+			</div>
+		</div>
+	<div class="content">
+	<div class="content-middle"><h2>About Git:</h2><p>Git is a distributed revision control and source code management (SCM) system with an emphasis on speed, data integrity,and support for distributed, non-linear workflows. Git was initially designed and developed by Linus Torvalds for Linux kernel development in 2005, and has since become the most widely adopted version control system for software development.</p>
+<p>As with most other distributed revision control systems, and unlike most client-server systems, every Git working directory is a full-fledged repository with complete history and full version tracking capabilities, independent of network access or a central server. Like the Linux kernel, Git is free software distributed under the terms of the GNU General Public License version 2.</p>
+	</div>
+	<div class="content-middle"><h2>About Apache:</h2><p>The Apache HTTP Server Project is an effort to develop and maintain an open-source HTTP server for modern operating systems including UNIX and Windows NT. The goal of this project is to provide a secure, efficient and extensible server that provides HTTP services in sync with the current HTTP standards.</p>
+	</div>
+	<div class="content-middle"><h2>About CentOS:</h2><b>The Community ENTerprise Operating System</b> (CentOS) is an Enterprise-class Linux Distribution derived from sources freely provided to the public by a prominent North American Enterprise Linux vendor.  CentOS conforms fully with the upstream vendors redistribution policy and aims to be 100% binary compatible. (CentOS mainly changes packages to remove upstream vendor branding and artwork.)  The CentOS Project is the organization that builds CentOS.</p>
+	</div>
+	</div>
+</body>
+</html>

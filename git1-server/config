@@ -1,0 +1,6 @@
+
+host gitolite
+    user git
+    hostname emm-git1.sys.comcast.net
+    port 22
+    identityfile ~/.ssh/id_rsa

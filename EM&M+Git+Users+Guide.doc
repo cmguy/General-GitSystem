@@ -1,0 +1,1173 @@
+<html>
+    <head>
+        <!-- MS Word on Windows doesn't realise the encoding is UTF-8 unless this meta tag is present -->
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+        <base href="https://wiki.io.comcast.net" />
+        <title>EM&amp;M Git Users Guide</title>
+        <style>
+            body, p, td, table, tr, .bodytext, .stepfield {
+	            font-family: Verdana, arial, sans-serif;
+            }
+            .panel {
+                margin: 10px;
+                padding: 10px;
+                border: 1px solid #999;
+                background-color: #f0f0f0;
+            }
+            .noteMacro { border-style: solid; border-width: 1px; border-color: #F0C000; background-color: #FFFFCE; text-align:left;}
+            .warningMacro { border-style: solid; border-width: 1px; border-color: #c00; background-color: #fcc; text-align:left;}
+            .infoMacro { border-style: solid; border-width: 1px; border-color: #69c; background-color: #D8E4F1; text-align:left;}
+            .tipMacro { border-style: solid; border-width: 1px; border-color: #090; background-color: #dfd; text-align:left;}
+            .informationMacroPadding { padding: 5px 0 0 5px; }
+
+            table.infoMacro td, table.warningMacro td, table.tipMacro td, table.noteMacro td, table.sectionMacro td {
+                border: none;
+            }
+
+            .grid {
+                margin: 2px 0px 5px 0px;
+                border-collapse: collapse;
+            }
+            .grid th  {
+                border: 1px solid #ccc;
+                padding: 2px 4px 2px 4px;
+                background: #f0f0f0;
+                text-align: center;
+            }
+            .grid td  {
+                border: 1px solid #ccc;
+                padding: 3px 4px 3px 4px;
+            }            
+        </style>
+    </head>
+
+    <body style="background-color: white; padding: 10px;">
+        <h1>EM&amp;M Git Users Guide</h1>
+        
+<style>
+.this-toc {
+width: 275px;
+float: right;
+margin: 0px 0px 20px 20px;
+padding: 5px;
+}
+
+.this-toc ul {
+padding-left: 6px;
+margin-left: 6px;
+}
+</style>
+
+<div class="this-toc">
+ <div class="panel" style="border-width: 1px;"><div class="panelHeader" style="border-bottom-width: 1px;"><b>Table of Contents</b></div><div class="panelContent">
+<div>
+<ul>
+    <li><a href='#EM%26MGitUsersGuide-Overview'>Overview</a></li>
+<ul>
+<ul>
+    <li><a href='#EM%26MGitUsersGuide-Standards'>Standards</a></li>
+<ul>
+    <li><a href='#EM%26MGitUsersGuide-IdentifyDependencies'>Identify Dependencies</a></li>
+    <li><a href='#EM%26MGitUsersGuide-DeploymentRules'>Deployment Rules</a></li>
+</ul>
+    <li><a href='#EM%26MGitUsersGuide-Prerequisites'>Prerequisites</a></li>
+</ul>
+</ul>
+    <li><a href='#EM%26MGitUsersGuide-InstallingGit'>Installing Git</a></li>
+<ul>
+<ul>
+    <li><a href='#EM%26MGitUsersGuide-FirstTimeGitSetup'>First-Time Git Setup</a></li>
+</ul>
+    <li><a href='#EM%26MGitUsersGuide-SetupGitHomeonYourWorkstation'>Setup GitHome on Your Workstation</a></li>
+    <li><a href='#EM%26MGitUsersGuide-IdentifyYourselfinGit%2CDefaultEditor%2CandDiffTool'>Identify Yourself in Git, Default Editor, and Diff Tool</a></li>
+<ul>
+    <li><a href='#EM%26MGitUsersGuide-SSHPublicKey'>SSH Public Key</a></li>
+    <li><a href='#EM%26MGitUsersGuide-UpgradeGit'>Upgrade Git</a></li>
+</ul>
+</ul>
+    <li><a href='#EM%26MGitUsersGuide-EM%26MGitRelatedSupport'>EM&amp;M Git Related Support</a></li>
+<ul>
+<ul>
+    <li><a href='#EM%26MGitUsersGuide-GitWeb'>GitWeb</a></li>
+    <li><a href='#EM%26MGitUsersGuide-SharedTemporaryRepos'>Shared Temporary Repos</a></li>
+    <li><a href='#EM%26MGitUsersGuide-EM%26MGitSystem'>EM&amp;M Git System</a></li>
+    <li><a href='#EM%26MGitUsersGuide-GitSupportforEclipse'>Git Support for Eclipse</a></li>
+</ul>
+</ul>
+    <li><a href='#EM%26MGitUsersGuide-Documentation'>Documentation</a></li>
+<ul>
+<ul>
+    <li><a href='#EM%26MGitUsersGuide-GitoliteAdministration'>Gitolite Administration</a></li>
+    <li><a href='#EM%26MGitUsersGuide-RepositoryBranches'>Repository Branches</a></li>
+    <li><a href='#EM%26MGitUsersGuide-MainBranches'>Main Branches</a></li>
+    <li><a href='#EM%26MGitUsersGuide-SupportingBranches'>Supporting Branches</a></li>
+<ul>
+    <li><a href='#EM%26MGitUsersGuide-FeatureBranches'>Feature Branches</a></li>
+    <li><a href='#EM%26MGitUsersGuide-ReleaseBranches'>Release Branches</a></li>
+    <li><a href='#EM%26MGitUsersGuide-HotfixBranches'>Hotfix Branches</a></li>
+</ul>
+    <li><a href='#EM%26MGitUsersGuide-ReleaseTags'>Release Tags</a></li>
+    <li><a href='#EM%26MGitUsersGuide-EM%26MModulesinGit'>EM&amp;M Modules in Git</a></li>
+    <li><a href='#EM%26MGitUsersGuide-DeveloperDeploymentBranches'>Developer Deployment Branches</a></li>
+</ul>
+</ul>
+    <li><a href='#EM%26MGitUsersGuide-UsefulCommandSyntax'>Useful Command Syntax</a></li>
+    <li><a href='#EM%26MGitUsersGuide-CheatSheets'>Cheat Sheets</a></li>
+    <li><a href='#EM%26MGitUsersGuide-UsefulLinks'>Useful Links</a></li>
+</ul></div>
+</div></div> 
+</div>
+
+<!--div style="clear: both;"></div-->
+
+
+<h2><a name="EM%26MGitUsersGuide-Overview"></a>Overview</h2>
+
+<p>The intended audience for this User Guide is all roles active in the Event Management &amp; Mediation (EM&amp;M), (formerly Converged Event Management Platform (CEMP)), organization. The associated admin guide for this user guide is the <a href="https://wiki.io.comcast.net/display/CEMP/Git+Repo+System+Admin+Guide">Git Repo System Admin Guide</a>.</p>
+
+<p>The EM&amp;M Git Primary Repository server alias is <a href="http://emm-git1.sys.comcast.net">emm-git1.sys.comcast.net</a>.</p>
+
+<p>All the sections of this document leading up to the <b>Documentation</b> section are intended for setting up and getting oriented to the EM&amp;M development environment based on the <a href="http://en.wikipedia.org/wiki/Git_(software)">Git</a> tool.</p>
+
+<p>If you have not worked with Git before, it is recommended you review the <a href="http://gitref.org">Git Reference</a> before moving further in this document. This review provides a basis of Git understanding that is assumed for the remainder of this User Guide.</p>
+
+<p>The purpose of this document is to:</p>
+<ol>
+	<li>Identify how to set up and maintain a Git environment on EM&amp;M development and analyst Windows 7 workstations.</li>
+	<li>Provide a single document for all things related to EM&amp;M Git usage. This includes related Standards and Deployment rules.</li>
+	<li>Provide introductions and links to appropriate documents for more detailed reference.</li>
+</ol>
+
+
+<p><b>Notes:</b></p>
+<ol>
+	<li>When using links on this page, <b>Right-click</b> and select <b>Open link in new tab</b> to maintain visibility to this page.</li>
+	<li>The Git tool is not file-oriented, each check-in can be a set of many files.</li>
+	<li>The Git approach:
+	<ol>
+		<li>Branch from a known managed branch,</li>
+		<li>Adjust and modify your branch for needed changes,</li>
+		<li>Merge your branch into all known managed branches,</li>
+		<li>Test all branches you merged into for the new changes.</li>
+	</ol>
+	</li>
+	<li>Where did the term Git originate from? Reference the <b>History</b> section of <a href="http://en.wikipedia.org/wiki/Git_(software)">Git (software)</a> in Wikipedia.</li>
+</ol>
+
+
+<h4><a name="EM%26MGitUsersGuide-Standards"></a>Standards</h4>
+
+<p>The following standards have been identified and are maintained to support smooth, automated release deployments to EM&amp;M production environments. Every effort is made to identify the minimum set of standards required to keep the complexity of deployment process and procedures to a minimum.</p>
+
+<p>The ability to merge changes with existing deployments and development sets before an environment is deployed to is essential for build and deployment automation and stable environments. The environments this system is used to support must be fully represented in the deployment sets new changes are merged with. This means that at the time an environment is deployed to from this system, steps must be taken to ensure the deployments in the environments match the deployment sets maintained in this Distributed Version Control System (DVCS).</p>
+
+<p>If the deployments are <b>Full Module Baselines <sup>[Note 1]</sup></b>, this is easy to maintain at the time of environment deployments. If changes are allowed in the deployed-to environments without adhering to these standards, steps need to be taken at environment deployment time to ensure the DVCS maintained deployments match the environments they are intended for. If this is not done, development merges will be incomplete for future deployments causing future deployment failures. While <b>Full Module Baseline <sup>[Note 1]</sup></b> can be automated for builds and deployments, these steps to ensure all environments changes are accounted for are not without human intervention. Unanticipated environment changes can cause deployment failures even if they are identified before a deployment is allowed to complete. This is the main reason automation is difficult, however, not impossible for these steps.</p>
+
+<p>It is best to know about and plan for all environment changes prior to environment deployments. This can be accomplished by only allowing changes to supported environments via this DVCS.</p>
+
+<h6><a name="EM%26MGitUsersGuide-IdentifyDependencies"></a>Identify Dependencies</h6>
+
+<ul>
+	<li>EM&amp;M Release tag that the current Developer deployment replaces</li>
+	<li>Release tag of the Developer deployment tag this module was last released to the Production environment with</li>
+	<li>Data Streams</li>
+	<li>Database bases by environment, tables by database, rows by tables, fields by rows and tables</li>
+	<li>Dependent applications are listed by deployment or release identifier starting with OS deployment/release</li>
+	<li>List all environment variances for Development, QA, Test, and Production environments. Identify why they are currently needed and what the current mitigation plans are for each variance.</li>
+</ul>
+
+
+<h6><a name="EM%26MGitUsersGuide-DeploymentRules"></a>Deployment Rules</h6>
+
+<p>All deployments are the result of branching and merging activities as described in this documentation. It is imperative that merges be reviewed and performed by developers or lead developers familiar with all deltas involved with the merge. It is the responsibility of each developer performing a merge to seek out help for all deltas they may not be familiar with.</p>
+
+<p>For consistent reference of source and deployment elements, it is recommended you have the following higher level directories in your repo file structure:</p>
+<ul>
+	<li>app - Directory for all elements related to the application including build structure and required libraries, etc.</li>
+	<li>db - All database related elements.</li>
+	<li>doc - All documentation for deployment related activities, build instructions, environment validation documents, etc.</li>
+</ul>
+
+
+<p>Deployments are <b>full module baselines <sup>[Note 1]</sup></b> to support automated builds and deployments. The target on the system is comprised of the module name (repo name) and the release identifier (Tag). This allows for testing and comparison activities on the target system.</p>
+
+<p>All dependencies for a given repo release deployment are identified and verified in the target environment at the time of the deployment. <b><font color="red">How yet to be defined</font></b></p>
+
+<p>If a portion of the full module baseline is the target of an environment install:</p>
+<ul>
+	<li>All elements of the target deployment MUST be identified and scripted for each target environment deployment.</li>
+	<li>All <b>variance <sup>[Note 2]</sup></b> between the repo tagged elements for the release and deployed elements in the environment are identified and cataloged.</li>
+	<li>All identified variances are either checked into the repo or adjusted in the environment. This is how environment-deployed elements are merged with the repo release tagged elements.<br/>
+<b>Note:</b> - If the deployment is a Full Module Baseline, the bullet tasks above are not required.</li>
+</ul>
+
+
+<p>Quick-fix patch deployments are based on hotfix branches. The hotfix branching process is described below in this document.</p>
+
+<p>No deployments are made to any of the EM&amp;M environments (QA, Test, UAT, Production, etc) unless they are managed by the above EM&amp;M deployment rules.</p>
+
+<p><b>Notes:</b></p>
+<ol>
+	<li>- <b>Full Module Baselines</b> are all release-tagged elements that are a part of, or contribute to, the deployment set. The deployment set is a full representation of the Module being deployed. This includes all elements that changes can be made to for the module in question. Conditionally, source code files in the repo are tagged with the release tag they contribute to. Resulting executables from tagged source file set builds are deployed to the environment. This deployment is done under a structure that identifies the repo release and are not in the repo or tagged since they are objects from the build that uses the source code files as input. Also included are tagged database file revisions maintained in the repo that implement or describe the structure of the Database(s) implemented and maintained with the repo.</li>
+	<li>- For variance identification, if a deployed element in the target environment is found to be different that its release-tagged counterpart in the repo, or is not in the repo, it is deemed a variance. If a release-tagged element is not found in the deployed environment or is different that it's deployed counterpart in the environment, it is deemed a variance.</li>
+</ol>
+
+
+<h4><a name="EM%26MGitUsersGuide-Prerequisites"></a>Prerequisites</h4>
+
+<ul>
+	<li>Comcast workstation/laptop with Windows XP or 7</li>
+	<li>Comcast NTLogon with admin access on workstation</li>
+	<li>Each analyst needs to install git. See the Installing Git section of this document.</li>
+</ul>
+
+
+<h2><a name="EM%26MGitUsersGuide-InstallingGit"></a>Installing Git</h2>
+
+<p>Click on the <b>DOWNLOADS</b> link at <a href="http://msysgit.github.io/">Git for Windows</a>, download the latest "Full installer for official Git for Windows" release, (latest beta), and run it on your workstation system to install. You will see several, use the latest one.</p>
+
+<ul>
+	<li>During the install you will encounter the following windows along with other standard install windows. Use defaults settings/options along with the selections indicated in the following windows: (Click on the windows to enlarge)</li>
+</ul>
+
+
+<div class='table-wrap'>
+<table class='confluenceTable'><tbody>
+<tr>
+<td class='confluenceTd'>&nbsp;</td>
+<td class='confluenceTd'>&nbsp;</td>
+<td class='confluenceTd'> <span class="image-wrap" style=""><a class="confluence-thumbnail-link 503x385" href='https://wiki.io.comcast.net/download/attachments/227392710/1st_git_install.png'><img src="/download/thumbnails/227392710/1st_git_install.png" style="border: 0px solid black" /></a></span> </td>
+<td class='confluenceTd'> <span class="image-wrap" style=""><a class="confluence-thumbnail-link 503x385" href='https://wiki.io.comcast.net/download/attachments/227392710/2nd_git_install.png'><img src="/download/thumbnails/227392710/2nd_git_install.png" style="border: 0px solid black" /></a></span> </td>
+<td class='confluenceTd'> <span class="image-wrap" style=""><a class="confluence-thumbnail-link 503x385" href='https://wiki.io.comcast.net/download/attachments/227392710/3rd_git_install.png'><img src="/download/thumbnails/227392710/3rd_git_install.png" style="border: 0px solid black" /></a></span> </td>
+</tr>
+</tbody></table>
+</div>
+
+
+<h4><a name="EM%26MGitUsersGuide-FirstTimeGitSetup"></a>First-Time Git Setup</h4>
+
+<p>After you have installed Git successfully, there are a few tasks you need to perform in order to use git in the EM&amp;M organization. You need to:</p>
+<ul>
+	<li>setup GitHome on Your Workstation,</li>
+	<li>identify yourself in Git,</li>
+	<li>setup your default editor,</li>
+	<li>setup the diff tool you will use.</li>
+</ul>
+
+
+<h3><a name="EM%26MGitUsersGuide-SetupGitHomeonYourWorkstation"></a>Setup GitHome on Your Workstation</h3>
+
+<ol>
+	<li>Click on Start (Lower Right Windows Bubble)</li>
+	<li>Right Click on <b>Computer</b> and select <b>Properties</b></li>
+	<li>Select <b>Advanced system settings</b></li>
+	<li>Click on the <b>Environment Variables...</b> button on the "Advanced" tab of the System Properties window</li>
+	<li>Add a New System variable
+	<ol>
+		<li>select the *New..." button under the System variables window. In the "New System Variable" window:
+		<ol>
+			<li>Set Variable name: githome</li>
+			<li>Set Variable value: C:\Users[Your UserID]</li>
+			<li>Click on the <b>New...</b> button</li>
+		</ol>
+		</li>
+		<li>Click on the <b>OK</b> button on the "Environments Variables" window</li>
+	</ol>
+	</li>
+</ol>
+
+
+<h3><a name="EM%26MGitUsersGuide-IdentifyYourselfinGit%2CDefaultEditor%2CandDiffTool"></a>Identify Yourself in Git, Default Editor, and Diff Tool</h3>
+
+<ol>
+	<li>Enter your first and last name:<br/>
+$ git config &#45;-global user.name "Andy Wallace"</li>
+	<li>Enter your Comcast email address:<br/>
+$ git config &#45;-global user.email Andrew_Wallace@cable.comcast.com</li>
+	<li>Setup your editor:<br/>
+$ git config &#45;-global core.editor vim</li>
+	<li>Setup you diff tool:<br/>
+$ git config &#45;-global merge.tool vimdiff</li>
+</ol>
+
+
+<p>You can run the following command to see all of you Git settings:</p>
+<div class='table-wrap'>
+<table class='confluenceTable'><tbody>
+<tr>
+<td class='confluenceTd'>&nbsp;</td>
+<td class='confluenceTd'>&nbsp;</td>
+<td class='confluenceTd'> $ git config &#45;-list </td>
+</tr>
+<tr>
+<td class='confluenceTd'>&nbsp;</td>
+<td class='confluenceTd'>&nbsp;</td>
+<td class='confluenceTd'> core.symlinks=false </td>
+</tr>
+<tr>
+<td class='confluenceTd'>&nbsp;</td>
+<td class='confluenceTd'>&nbsp;</td>
+<td class='confluenceTd'> core.autocrlf=true </td>
+</tr>
+<tr>
+<td class='confluenceTd'>&nbsp;</td>
+<td class='confluenceTd'>&nbsp;</td>
+<td class='confluenceTd'> color.diff=auto </td>
+</tr>
+<tr>
+<td class='confluenceTd'>&nbsp;</td>
+<td class='confluenceTd'>&nbsp;</td>
+<td class='confluenceTd'> color.status=auto </td>
+</tr>
+<tr>
+<td class='confluenceTd'>&nbsp;</td>
+<td class='confluenceTd'>&nbsp;</td>
+<td class='confluenceTd'> color.branch=auto </td>
+</tr>
+<tr>
+<td class='confluenceTd'>&nbsp;</td>
+<td class='confluenceTd'>&nbsp;</td>
+<td class='confluenceTd'> color.interactive=true </td>
+</tr>
+<tr>
+<td class='confluenceTd'>&nbsp;</td>
+<td class='confluenceTd'>&nbsp;</td>
+<td class='confluenceTd'> pack.packsizelimit=2g </td>
+</tr>
+<tr>
+<td class='confluenceTd'>&nbsp;</td>
+<td class='confluenceTd'>&nbsp;</td>
+<td class='confluenceTd'> help.format=html </td>
+</tr>
+<tr>
+<td class='confluenceTd'>&nbsp;</td>
+<td class='confluenceTd'>&nbsp;</td>
+<td class='confluenceTd'> http.sslcainfo=/bin/curl-ca-bundle.crt </td>
+</tr>
+<tr>
+<td class='confluenceTd'>&nbsp;</td>
+<td class='confluenceTd'>&nbsp;</td>
+<td class='confluenceTd'> sendemail.smtpserver=/bin/msmtp.exe </td>
+</tr>
+<tr>
+<td class='confluenceTd'>&nbsp;</td>
+<td class='confluenceTd'>&nbsp;</td>
+<td class='confluenceTd'> diff.astextplain.textconv=astextplain </td>
+</tr>
+<tr>
+<td class='confluenceTd'>&nbsp;</td>
+<td class='confluenceTd'>&nbsp;</td>
+<td class='confluenceTd'> rebase.autosquash=true </td>
+</tr>
+<tr>
+<td class='confluenceTd'>&nbsp;</td>
+<td class='confluenceTd'>&nbsp;</td>
+<td class='confluenceTd'> user.name=Andy Wallace </td>
+</tr>
+<tr>
+<td class='confluenceTd'>&nbsp;</td>
+<td class='confluenceTd'>&nbsp;</td>
+<td class='confluenceTd'> user.email=Andrew_Wallace@cable.comcast.com </td>
+</tr>
+<tr>
+<td class='confluenceTd'>&nbsp;</td>
+<td class='confluenceTd'>&nbsp;</td>
+<td class='confluenceTd'> core.editor=vim </td>
+</tr>
+<tr>
+<td class='confluenceTd'>&nbsp;</td>
+<td class='confluenceTd'>&nbsp;</td>
+<td class='confluenceTd'> merge.tool=gvimdiff </td>
+</tr>
+<tr>
+<td class='confluenceTd'>&nbsp;</td>
+<td class='confluenceTd'>&nbsp;</td>
+<td class='confluenceTd'> gui.recentrepo=C:/Users/awalla5075k/1st_Project </td>
+</tr>
+<tr>
+<td class='confluenceTd'>&nbsp;</td>
+<td class='confluenceTd'>&nbsp;</td>
+<td class='confluenceTd'> gui.recentrepo=C:/Users/awalla5075k/git-test/CFX_BR_CEMP_CMTools </td>
+</tr>
+</tbody></table>
+</div>
+
+
+<div class='table-wrap'>
+<table class='confluenceTable'><tbody>
+<tr>
+<td class='confluenceTd'>&nbsp;</td>
+<td class='confluenceTd'>&nbsp;</td>
+<td class='confluenceTd'> awalla5075k@CO183LCETENG08 ~ </td>
+</tr>
+<tr>
+<td class='confluenceTd'>&nbsp;</td>
+<td class='confluenceTd'>&nbsp;</td>
+<td class='confluenceTd'> $ </td>
+</tr>
+</tbody></table>
+</div>
+
+
+<p>For more details on initial setup, refer to <a href="http://git-scm.com/book/en/Getting-Started-First-Time-Git-Setup">First-Time Git setup</a>.</p>
+
+<h4><a name="EM%26MGitUsersGuide-SSHPublicKey"></a>SSH Public Key</h4>
+
+<p>In order to gain access to the EM&amp;M Repository Server, you'll need to email your public SSH key to the EM&amp;M Configuration Management (CM) team, (Currently this is Andrew Wallace, Robert Sell, and Bruce Woodcock). Follow instructions at <a href="http://git-scm.com/book/en/Git-on-the-Server-Generating-Your-SSH-Public-Key">Generating Your SSH Public Key</a>.</p>
+
+<p>When emailing your SSH Public Key to the EM&amp;M CM team:</p>
+<ul>
+	<li>Rename your public key file using your Comcast Userid, i.e., awalla5075k.pub. Your userid will be the userid used by the gitolite admin tool.</li>
+	<li>Rename (or copy) your private key on your workstation in $githome/.ssh/ to your Comcast Userid. ($ cp id_rsa awalla5075k)</li>
+	<li>If you have multiple workstations, you will need multiple ssh keys. Contact the EM&amp;M CM team for more information.</li>
+	<li>Be sure your git workarea(s) on your windows workstation are on the C Drive. Change directory to your host initially:
+	<ul>
+		<li>awalla5075k@CO183LCETENG08 /h</li>
+		<li>$ pwd</li>
+		<li>/h</li>
+		<li>&nbsp;</li>
+		<li>awalla5075k@CO183LCETENG08 /h</li>
+		<li>$ cd $githome</li>
+		<li>&nbsp;</li>
+		<li>awalla5075k@CO183LCETENG08 ~</li>
+		<li>$ pwd</li>
+		<li>/c/Users/awalla5075k</li>
+		<li>&nbsp;</li>
+		<li>awalla5075k@CO183LCETENG08 ~</li>
+		<li>$</li>
+	</ul>
+	</li>
+</ul>
+
+
+<h4><a name="EM%26MGitUsersGuide-UpgradeGit"></a>Upgrade Git</h4>
+
+<p>Follow the same steps for Installing Git in the previous section. Note the expected version release change after you are done.</p>
+
+<h2><a name="EM%26MGitUsersGuide-EM%26MGitRelatedSupport"></a>EM&amp;M Git Related Support</h2>
+
+<p>The EM&amp;M Repository system at <a href="http://emm-git1.sys.comcast.net/git/">emm-git1.sys.comcast.net/git/</a> is a Central Repository supporting build and deployment automation opportunities for EM&amp;M modules. This section focuses on functionality provided for and supported with this system.</p>
+
+<p>There are five roles supported by this Repository system:</p>
+
+<div class='table-wrap'>
+<table class='confluenceTable'><tbody>
+<tr>
+<th class='confluenceTh'>Role</th>
+<th class='confluenceTh'>Description</th>
+</tr>
+<tr>
+<td class='confluenceTd'>Administrators</td>
+<td class='confluenceTd'>Full privileges on all EM&amp;M repository server repos.</td>
+</tr>
+<tr>
+<td class='confluenceTd'>General User</td>
+<td class='confluenceTd'>Same privileges as a developer. Intended for other various roles who wish to use Git repos for storing all types of files and documents.</td>
+</tr>
+<tr>
+<td class='confluenceTd'>Developer</td>
+<td class='confluenceTd'>Full privileges as creator on tmp repos. Read only on Development Lead created repos. Read/write on EM&amp;M repos used for production deployment. EM&amp;M repos are created from Development Lead created repos. Restricted from merging to "develop" and "master" branches.</td>
+</tr>
+<tr>
+<td class='confluenceTd'>Development Lead</td>
+<td class='confluenceTd'>Has the ability to initialize repos and merge to all repo develop branches. Restricted from merging to "master" branches.</td>
+</tr>
+<tr>
+<td class='confluenceTd'>Lead Developer</td>
+<td class='confluenceTd'>Has the ability to merge in all repo develop branches. Ristricted from merging to "master" branches. Users placed in this list are selected by Development Leads.</td>
+</tr>
+</tbody></table>
+</div>
+
+
+<h4><a name="EM%26MGitUsersGuide-GitWeb"></a>GitWeb</h4>
+
+<p><a href="http://emm-git1.sys.comcast.net/git/">emm-git1.sys.comcast.net/git/</a> is a link to the GitWeb site of the EM&amp;M Central Repository supporting EM&amp;M employees and contractors with configured, central Git repository functionality.</p>
+
+<h4><a name="EM%26MGitUsersGuide-SharedTemporaryRepos"></a>Shared Temporary Repos</h4>
+
+<p>For each EM&amp;M Project/Development Group, developers can create temporary repos to back up their workstations. These temporary repos can be used to share code between developers. They can also be used to submit code to be merged with the develop branch. The repo name components for a temporary repository is documented in the following EM&amp;M Git Server section.</p>
+
+<h4><a name="EM%26MGitUsersGuide-EM%26MGitSystem"></a>EM&amp;M Git System</h4>
+
+<p>The <a href="http://emm-git1.sys.comcast.net/git/">emm-git1.sys.comcast.net/git/</a> provides an immediate backup for EM&amp;M developer workstations. It also provides:</p>
+<ul>
+	<li>Full repo workareas based on shared module repos.</li>
+	<li>Repo master and develop branches to merge with on the developer workstation.</li>
+	<li>Daily Backups and restores to server <a href="http://emm-git2.sys.comcast.net">emm-git2.sys.comcast.net</a> which is physically located in Chicago. The primary server <a href="http://emm-git1.sys.comcast.net">emm-git1.sys.comcast.net</a> is physically located here in Denver at the potomac site.</li>
+</ul>
+
+
+<p>In the following table note that "repo name" is the name of the EM&amp;M Git repository module.</p>
+
+<p>The git command syntax for interacting with the EM&amp;M Git Server is as follows:</p>
+
+<table border=4>
+<tr>
+<th>Task</th>
+<th>Git Suntax</th>
+<th>Comments</th>
+</tr>
+<tr>
+<td valign="top">Clone repository using ssh key Read/Write access.</td>
+<td valign="top">$ git clone ssh://git@emm-git1.sys.comcast.net/[repo name]</td>
+<td valign="top">Requires:<br>
+1. user ssh key delivered to and implemented by EM&M CM team.<br>
+2. User in group with read permissions to "repo name".
+</td>
+</tr>
+<tr>
+<td valign="top">Clone repository using http Read only access.</td>
+<td valign="top">$ git clone http://emm-git1.sys.comcast.net/[repo-name]</td>
+<td valign="top">Comcast analyst can clone repository to their workstation with<br>
+no other requirements. Check with your lead or Git administrator.<br>
+The project or repo-name needs to be configured for http access initially.</td>
+</tr>
+<tr>
+<td valign="top">Create temporary repo for sharing with other developers and lead.</td>
+<td valign="top">$ git clone ssh://git@emm-git1.sys.comcast.net/tmp/CREATOR/[LOB]-[Project]_[Major]_[Minor]_[Dev]_[Test]</td>
+<td valign="top">Requires:<br>
+  <ul>
+   <li>User ssh key delivered to and implemented by EM&M CM team.
+   <li>Dev Lead Area established with Dev Lead who will manage.
+  </ul>
+These temporary repos are also used to submit code for merging with development branches.<br>
+The repo name components for a temporary repository is as follows:
+  <ul>
+   <li>tmp - This directory indicates repos created here are temporary in nature. Once they have been merged with gitflow repos they should be removed.
+   <li>CREATOR - This is substituted with the analyst's logon ID as<br>identified with the analyst's public ssh key name.
+   <li>LOB - Line of Business, one of CFX,VIDEO,VOICE, or DATA
+   <li>Project - Name at discretion of Dev Lead. Does not contain / or _.
+   <li>Major - Number for baseline functionality.
+   <li>Minor - Number for for partial release to associated Major number.
+   <li>Dev - Numeric increment for each version of the MAJOR_MINOR release<br>delivered by CEMP Development.
+   <li>Test - Numeric increment for each version of the MAJOR_MINOR_DEV<br>release delivered by CEMP Development.
+  </ul>
+</td>
+</tr>
+<tr>
+<td valign="top">Development lead initializes new repo for future production deployment.</td>
+<td valign="top">$ git clone ssh://git@emm-git1.sys.comcast.net/CREATOR/[LOB]-[Project]</td>
+<td valign="top">Requires:<br>
+  <ul>
+   <li>User ssh key delivered to and implemented by EM&M CM team.
+   <li>Dev Lead Area established with Dev Lead who will manage.
+  </ul>
+These initial repos are setup with general developer access and ownership by the Development lead.<br>
+The repo name components for an initial repo setup by a devload are as follows:
+  <ul>
+   <li>CREATOR - This is substituted with the analyst's logon ID as<br>identified with the analyst's public ssh key name.
+   <li>LOB - Line of Business, one of CFX,VIDEO,VOICE, or DATA
+   <li>Project - Name at discretion of Dev Lead. Does not contain / or _.
+  </ul>
+Before a Development lead initiated repo is merged into the master branch for a production deployment release, it needs to be finalized in the repository by the Configuration Management staff.
+</td>
+</tr>
+<tr>
+<td valign="top">Finalize development lead initialized new repo for future production deployment.</td>
+<td valign="top">CM Staff updates EM&M Repository and Repository Configurations</td>
+<td valign="top">Procedure to finalize devlead initiated repos is documented in the preamble for devlead created repos. Need the following from devleads for this procedure:
+<ol>
+<li>Repo Devlead FirstName LastName
+<li>Repo Description
+<li>Repo Catagory
+</ol>
+Verify Development Lead has initiated a an upstream "develop" on the emm-git server for the repo with the following command:<br>
+$ git push --set-upstream origin develop
+</td>
+</tr>
+<tr>
+<td valign="top">Push local repo on your workstation to the EM&M Git server.</td>
+<td valign="top">$ git push</td>
+<td valign="top">Requires local repo to have been setup with a "git clone" option<br>
+  that has <b>write</b> authority on the EM&M Git server.
+</td>
+</tr>
+<tr>
+<td valign="top">Identify by Analyst EM&M Git Server repos access.</td>
+<td valign="top">$ ssh git@emm-git1.sys.comcast.net info -h</td>
+<td valign="top">Provides analyst with reports on current repos access for the EM&M Git server.
+</td>
+</tr>
+</table>
+
+
+<h4><a name="EM%26MGitUsersGuide-GitSupportforEclipse"></a>Git Support for Eclipse</h4>
+<ul>
+	<li><a href="https://www.eclipse.org/egit/">EGit</a> <b><font color="red">Need to review and construct this section.</font></b></li>
+</ul>
+
+
+
+<h2><a name="EM%26MGitUsersGuide-Documentation"></a>Documentation</h2>
+
+<p>The primary reference for EM&amp;M Git documentation is <a href="http://git-scm.com/documentation">&#104;ttp://git-scm.com/documentation</a>. It is recommended you cover "Git Basics" and "Git Branching" at minimum. It is highly recommended you review the <a href="http://gitref.org">Git Reference</a> before moving further in this document. This review provides a basis of Git understanding that is assumed for the remainder of this User Guide.</p>
+
+<p>In order to understand how branching and merging is utilized for EM&amp;M deployments and releases review <a href="http://nvie.com/posts/a-successful-git-branching-model/">A Successful Git Branching Model by Vincent Driessen</a> in it's entirety. EM&amp;M specifics <font color="red"><b>will be</b></font> covered in this document.</p>
+
+<h4><a name="EM%26MGitUsersGuide-GitoliteAdministration"></a>Gitolite Administration</h4>
+
+<p>The application Gitolite is being used to administer this server by the Configuration Management team. See <a href="http://gitolite.com/gitolite/user.html">What Users Should Know about Gitolite</a> for details.</p>
+
+<h4><a name="EM%26MGitUsersGuide-RepositoryBranches"></a>Repository Branches</h4>
+
+<p>The first task a user of the EM&amp;M repository system does is to create a branch of a module repo branch they are targeting for change. Before any change is introduced back into the EM&amp;M repository system, the user must merge their change into the appropriate Main Branch of the targeted module repo. Module repo leads are assigned to aid users with these branching and merging tasks.</p>
+
+<h4><a name="EM%26MGitUsersGuide-MainBranches"></a>Main Branches</h4>
+
+<p>The are two Main Branches in any given EM&amp;M repo on the repository system, <b>develop</b> and <b>master</b>. Supporting branches are used to manage branching and merging tasks performed before and between these Main Branches.<br/>
+<b>Note:</b></p>
+<ol>
+	<li>In "Git Speak", <b>origin</b> is associated with the EM&amp;M repo on the repository system.</li>
+</ol>
+
+
+<p>The <b>develop</b> branch is the primary integration branch where automatic nightly builds are build from. When the source code in the <b>develop</b> branch reaches a stable point and is ready to be released, all of the changes are merged into the <b>master</b> branch and then tagged with a release number. The <b>master</b> branch is kept in sync with the latest production deployed release.</p>
+
+<h4><a name="EM%26MGitUsersGuide-SupportingBranches"></a>Supporting Branches</h4>
+
+<p>There are three types of supporting branches, <b>feature</b>, <b>release</b>, and <b>hotfix</b>.</p>
+
+<h6><a name="EM%26MGitUsersGuide-FeatureBranches"></a>Feature Branches</h6>
+
+<p>May branch off from: develop<br/>
+Must merge back into: develop<br/>
+Branch naming convention: Change Record or User Story number with developer deployment tags, (see below), or temporary name. Never master, develop, release-*, or hotfix-&#42;</p>
+
+<p>Feature branches (or sometimes called topic branches) are used to develop new features for the upcoming or a distant future release. When starting development of a feature, the target release in which this feature will be incorporated may well be unknown at that point. The essence of a feature branch is that it exists as long as the feature is in development, but will eventually be merged back into develop (to definitely add the new feature to the upcoming release) or discarded (in case of a disappointing experiment).</p>
+
+<p>Feature branches typically exist in developer repos only, not in origin. When merging a feature branch into the development branch, it must be coordinated with the assigned development lead.</p>
+
+<p>h7. Creating a feature branch</p>
+
+<p>When starting work on a new feature, branch off from the develop branch.</p>
+
+<p><div class='table-wrap'>
+
+<table id='TBL1404309614331' border='2' width='350' class='confluenceTable'><tbody>
+<tr>
+<th class='confluenceTh'> <div class="code panel" style="border-width: 1px;"><div class="codeContent panelContent">
+<pre class="code-java">
+$ git checkout -b USfeature1 develop
+Switched to a <span class="code-keyword">new</span> branch 'USfeature1'
+$
+</pre>
+</div></div> </th>
+</tr>
+</tbody></table>
+</div>
+
+<script type='text/javascript'> <!-- 
+//Copyright(c)2005,2010 Bob Swift and other contributors. All rights reserved. 
+function getElementInnerText(element){var str="";for(var i=0;i<element.childNodes.length;i++){switch(element.childNodes.item(i).nodeType){case 1:str+=getElementInnerText(element.childNodes.item(i));break;case 3:str+=element.childNodes.item(i).nodeValue;break;}}return str;}
+function trimSafe(v){return((v==undefined)||(v==null))?"":v.Trim();}String.prototype.Trim=new Function("return this.replace(/^\\s+|\\s+$/g,'')");
+function compareNumber(v1,v2){if(isNaN(v2)){if(isNaN(v1))return 0;return-1;}if(v1<v2)return-1;if(v1==v2)return 0;return 1;}
+function compareSeparatedNumber(v1,v2){for(i=0;(i<v1.length)&&(i<v2.length);i++){var result=compareNumber(parseInt(v1[i]),parseInt(v2[i]));if(result!=0)return result;}if(v1.length<v2.length)return-1;if(v2.length<v1.length)return 1;return 0;}
+function sortByCell(sortCell,firstDataRowIndex,footingCount){var compareFunction;var valueParser;compareFunction=compareNumber;if(sortCell.columnType=="I"){valueParser=function(value){return parseInt(getElementInnerText(value));};}else if(sortCell.columnType=="F"){valueParser=function(value){return parseFloat(getElementInnerText(value));};}else if(sortCell.columnType=="C"){valueParser=function(value){return parseFloat(getElementInnerText(value).replace(/[^\d\.\,\-]*([\d\.\,\-*]*).*/,'$1'));};}else if(sortCell.columnType.charAt(0)=='D'){if(Date.parseString){valueParser=function(value){var date=Date.parseString(trimSafe(getElementInnerText(value)),sortCell.columnType.substring(1));return((date==null)?NaN:date.getTime());};}else{valueParser=function(value){return Date.parse(getElementInnerText(value));};}}else if((sortCell.columnType=="/")||(sortCell.columnType==".")||(sortCell.columnType=="-")||(sortCell.columnType==":")){compareFunction=compareSeparatedNumber;valueParser=function(value){return getElementInnerText(value).split(sortCell.columnType);};}else if(sortCell.columnType=="A"){valueParser=function(value){return 0;};}else{compareFunction=function(v1,v2){if(v1<v2)return-1;if(v1==v2)return 0;return 1;};valueParser=function(value){return trimSafe(getElementInnerText(value)).toUpperCase();};}var headRowCount=(sortCell.sortTable.tHead==null)?0:sortCell.sortTable.tHead.rows.length;firstDataRowIndex=firstDataRowIndex-headRowCount;var table=sortCell.sortTable.tBodies[0];var rowCount=table.rows.length-firstDataRowIndex-footingCount;var map=Array(rowCount);var values=Array(rowCount);var compareTest=(sortCell.sortDescending?-1:1);sortCell.sortDescending=!sortCell.sortDescending;var firstCell=(((sortCell.sortTable.tHead==null)||(sortCell.sortTable.tHead.rows.length==0))?table.rows[0].cells[sortCell.columnIndex]:sortCell.sortTable.tHead.rows[0].cells[sortCell.columnIndex]);if((firstCell!=null)&&(firstCell.sortTable!=null)&&(firstCell.sortTable!=undefined)&&(firstCell.sortTable.sortImage!=null)&&(firstCell.sortTable.sortImage!=undefined)){firstCell.sortTable.sortImage.setAttribute("src",firstCell.sortDescending?firstCell.sortTable.sortAttributeDescending:firstCell.sortTable.sortAttributeAscending);firstCell.appendChild(firstCell.sortTable.sortImage);}var i;for(i=0;i<rowCount;i++){map[i]=sortCell.sortFirstTime?i:(rowCount-1-i);var row=table.rows[i+firstDataRowIndex];var cellValue=row.cells[sortCell.columnIndex];values[i]=valueParser(cellValue);}sortCell.sortFirstTime=false;var didSwap;do{didSwap=false;for(i=0;i<rowCount-1;i++){if(compareFunction(values[map[i]],values[map[i+1]])==compareTest){saveIndex=map[i];map[i]=map[i+1];map[i+1]=saveIndex;didSwap=true;}}}while(didSwap);var tableRows=new Array();for(i=0;i<rowCount+footingCount;i++){tableRows.push(table.rows[i+firstDataRowIndex]);}for(i=0;i<rowCount+footingCount;i++){table.removeChild(tableRows[i]);}for(i=0;i<rowCount;i++){var row=tableRows[map[i]];table.appendChild(row);if(row.autoNumber){row.cells[0].innerHTML=i+1;}}for(i=0;i<footingCount;i++){table.appendChild(tableRows[i+rowCount]);}}
+function enableSortOnCell(cell,columnIndex,table,columnTypes,customize){cell.style.cursor="pointer";cell.sortTable=table;cell.sortFirstTime=true;cell.sortDescending=false;cell.columnIndex=(customize.autoNumber?(columnIndex+1):columnIndex);if(columnIndex==-1){cell.columnType="I";}else{cell.columnType=(columnTypes&&columnTypes[columnIndex])?columnTypes[columnIndex]:"S";}if(cell.columnType!="X"){cell.onmouseover=function(){this.saveTitle=this.getAttribute('title');this.setAttribute('title',customize.sortTip+" "+((this.saveTitle!=null)&&(this.saveTitle!=undefined)?this.saveTitle:''));};cell.onmouseout=function(){this.setAttribute('title',this.saveTitle);};cell.onclick=function(){sortByCell(this,customize.firstDataRowIndex,customize.footingCount);};}else{cell.columnType=cell.columnType.substring(1);}}
+function sumColumn(table,index,firstDataRowIndex,columnType){var total=0;for(var i=firstDataRowIndex;i<table.rows.length;i++){var cell=table.rows[i].cells[index];var value;if(cell){if(columnType=='C'){value=parseFloat(getElementInnerText(cell).replace(/[^\d\.\,\-]*([\d\.\,\-*]*).*/,'$1'))}else{value=parseFloat(getElementInnerText(cell));}if(!isNaN(value)){total=total+value;}}}return total;}
+function appendTotalRow(table,columnTypes,firstDataRowIndex){var row=document.createElement('tr');var table=table.tBodies[0];var columnCount=(0<table.rows.length)?table.rows[table.rows.length-1].cells.length:0;for(var columnIndex=0;columnIndex<columnCount;columnIndex++){var column=document.createElement('th');column.className='confluenceTh';column.innerHTML=(columnIndex<columnTypes.length&&((columnTypes[columnIndex]=='I')||(columnTypes[columnIndex]=='F')||(columnTypes[columnIndex]=='C')))?sumColumn(table,columnIndex,firstDataRowIndex,columnTypes[columnIndex]):'';row.appendChild(column);}table.appendChild(row);}
+function handleRow(table,row,rowIndex,customize){var columnCount=row.cells.length;for(var i=0;i<columnCount;i++){if(customize.enableSorting&&(rowIndex<=customize.lastClickableRow)){enableSortOnCell(row.cells[i],i,table,customize.columnTypes,customize);}if((rowIndex==0)&&(customize.sortColumn!='')&&(customize.sortCell==null)&&(((i+1).toString()==customize.sortColumn)||(trimSafe(getElementInnerText(row.cells[i]))==customize.sortColumn)||(trimSafe(row.cells[i].getAttribute('title'))==customize.sortColumn))){customize.sortCell=row.cells[i];}if(customize.firstDataRowIndex<=rowIndex){if((customize.columnTypes[i]=="I")||(customize.columnTypes[i]=="F")||(customize.columnTypes[i]=="C")){row.cells[i].style.textAlign="right";}}if(customize.columnTypes[i]=="H"){row.cells[i].style.display="none";}if(customize.enableHeadingAttributes||(customize.firstDataRowIndex<=rowIndex)){if(i<customize.attrList.length){for(var j=0;j<customize.attrList[i].length;j++){var attr=customize.attrList[i][j].Trim().split("=");if(1<attr.length){var aName=attr[0].Trim();var aValue=attr[1].Trim();if((aName.toLowerCase()=="style")&&(2<aValue.length)){if((aValue.charAt(0)=='"')){aValue=aValue.substring(1,aValue.length-1);}row.cells[i].style.cssText=aValue;}else{row.cells[i].setAttribute(aName,aValue);}}}}}}if(customize.autoNumber){var column=document.createElement(!customize.autoNumberSort||(rowIndex<customize.firstDataRowIndex)?'th':'td');column.className=(!customize.autoNumberSort||(rowIndex<customize.firstDataRowIndex)?'confluenceTh':'confluenceTd');column.innerHTML=((rowIndex<customize.firstDataRowIndex)||(customize.totalRowCount-customize.firstDataRowIndex-customize.footingCount<rowIndex)?'':customize.dataRowCount++);column.setAttribute('align','right');row.autoNumber=!customize.autoNumberSort;row.insertBefore(column,row.cells[0]);if(customize.enableSorting&&customize.autoNumberSort&&(rowIndex<=customize.lastClickableRow)){enableSortOnCell(column,-1,table,null,customize);}}if((customize.highlightColor!="")&&(customize.firstDataRowIndex<=rowIndex)){row.onmouseover=function(){this.tableHighLightRowColor=this.bgColor;this.bgColor=customize.highlightColor;};row.onmouseout=function(){this.bgColor=this.tableHighLightRowColor;this.tableHighLightRowColor=null;};}}
+function customizeMacroTable(tableId,columnTypes,firstDataRowIndex,highlightColor,enableSorting,sortTip,sortColumn,sortDescending,autoNumber,autoNumberSort,enableHeadingAttributes,footingCount,autoTotal,iconLocation){var customize=new Object;customize.columnTypes=columnTypes;customize.firstDataRowIndex=firstDataRowIndex;customize.highlightColor=highlightColor;customize.enableSorting=enableSorting;customize.sortTip=sortTip;customize.sortColumn=sortColumn;customize.sortDescending=sortDescending;customize.autoNumber=autoNumber;customize.autoNumberSort=autoNumberSort;customize.enableHeadingAttributes=enableHeadingAttributes;customize.footingCount=footingCount;customize.autoTotal=autoTotal;customize.iconLocation=iconLocation;var table=(typeof(tableId)=="string")?document.getElementById(tableId):null;if(table){if(customize.autoTotal){appendTotalRow(table,customize.columnTypes,customize.firstDataRowIndex);customize.footingCount++;}if(customize.iconLocation!=""){table.sortAttributeAscending=contextPath+customize.iconLocation+"down.gif";table.sortAttributeDescending=contextPath+customize.iconLocation+"up.gif";table.sortImage=document.createElement("IMG");}customize.lastClickableRow=customize.firstDataRowIndex-1;if(customize.lastClickableRow<0){customize.lastClickableRow=0;}customize.sortCell=null;customize.dataRowCount=1;var colAttrs=columnAttributes.split(",");customize.attrList=Array(colAttrs.length);for(var i=0;i<colAttrs.length;i++){customize.attrList[i]=colAttrs[i].Trim().split(";;");}var rowIndex=0;var headRowCount=(table.tHead==null)?0:table.tHead.rows.length;var footRowCount=(table.tFoot==null)?0:table.tFoot.rows.length;var bodyRowCount=table.tBodies[0].rows.length;customize.totalRowCount=headRowCount+footRowCount+bodyRowCount;for(var i=0;i<headRowCount;i++){var row=table.tHead.rows[i];handleRow(table,row,rowIndex,customize);rowIndex++;}for(var i=0;i<bodyRowCount;i++){var row=table.tBodies[0].rows[i];handleRow(table,row,rowIndex,customize);rowIndex++;}for(var i=0;i<footRowCount;i++){var row=table.tFoot.rows[i];handleRow(table,row,rowIndex,customize);rowIndex++;}if(customize.sortCell!=null){customize.sortCell.sortDescending=customize.sortDescending;sortByCell(customize.sortCell,customize.firstDataRowIndex,customize.footingCount);}}return table;}
+
+var columnTypes = ['S'];
+var columnAttributes = '';
+customizeMacroTable('TBL1404309614331', columnTypes, 1, 'lightgoldenrodyellow', true, 'Click to sort', '', false, false, false, true, 0, false, '' );
+//-->
+ </script> </p>
+
+<p>h7. Merging a feature branch</p>
+
+<p>Finished features must be merged into the develop branch in order to add them to the upcoming release:</p>
+
+<p><div class='table-wrap'>
+
+<table id='TBL1404309614332' border='2' width='350' class='confluenceTable'><tbody>
+<tr>
+<th class='confluenceTh'> <div class="code panel" style="border-width: 1px;"><div class="codeContent panelContent">
+<pre class="code-java">
+$ git checkout develop
+Switched to branch 'develop'
+$ git merge --no-ff USFeature1
+Merge made by the 'recursive' strategy.
+ License    | 3 +++
+ readme.txt | 2 ++
+ test.rb    | 2 ++
+ 3 files changed, 7 insertions(+)
+$ git branch -d USFeature1
+Deleted branch USFeature1 (was 6786061).
+$ git push origin develop
+(summary of change)
+$
+</pre>
+</div></div> </th>
+</tr>
+</tbody></table>
+</div>
+
+<script type='text/javascript'> <!-- 
+var columnTypes = ['S'];
+var columnAttributes = '';
+customizeMacroTable('TBL1404309614332', columnTypes, 1, 'lightgoldenrodyellow', true, 'Click to sort', '', false, false, false, true, 0, false, '' );
+//-->
+ </script> </p>
+
+<p>The &#45;-no-ff flag causes the merge to always create a new commit object, even if the merge could be performed with a fast-forward. This avoids losing information about the historical existence of a feature branch. It groups together all commits that bundled added the feature.</p>
+
+<p>At this point the automated build is performed to validate all automated Build and Unit Test procedures are functioning successfully.</p>
+
+<h6><a name="EM%26MGitUsersGuide-ReleaseBranches"></a>Release Branches</h6>
+
+<p>May branch off from: develop<br/>
+Must merge back into: develop and master<br/>
+Branch naming convention: release-[Major].[Minor]<br/>
+<b>Note:</b> &#45; Major and Minor as defined below in the "Development Deployment Tags" section.</p>
+
+<p>Release branches support preparation of a new production release. They allow for last-minute dotting of i’s and crossing t’s. Furthermore, they allow for minor bug fixes and preparing meta-data for a release (version number, build dates, etc.). By doing all of this work on a release branch, the develop branch is cleared to receive features for the next big release.</p>
+
+<p>The key moment to branch off a new release branch from develop is when develop (almost) reflects the desired state of the new release. At least all features that are targeted for the release-to-be-built must be merged in to develop at this point in time. All features targeted at future releases may not---they must wait until after the release branch is branched off.</p>
+
+<p>It is exactly at the start of a release branch that the upcoming release gets assigned a version number---not any earlier. Up until that moment, the develop branch reflected changes for the “next release”, but it is unclear whether that “next release” will eventually become a new minor or major release until the release branch is started. That decision is made on the start of the release branch and is carried out by the project’s rules on version number bumping.</p>
+
+<p>When merging a release branch into the development branch, it must be coordinated with the assigned development lead. When merging a release branch into the master branch, it is performed by the Configuration Management team, coordinated with the affected development leads, and coordinated with the EM&amp;M release team and Comcast National Change Management (NCM) via an NCM CM and a EM&amp;M "Go No Go" meeting.</p>
+
+<p>h7. Creating a release branch</p>
+
+<p>Release branches are created from the develop branch. For example, say version 1.1.5 is the current production release and we have a big release coming up. The state of develop is ready for the “next release” and we have decided that this will become version 1.2 (rather than 1.1.6 or 2.0). So we branch off and give the release branch a name reflecting the new version number:</p>
+
+<p><div class='table-wrap'>
+
+<table id='TBL1404309614333' border='2' width='350' class='confluenceTable'><tbody>
+<tr>
+<th class='confluenceTh'> <div class="code panel" style="border-width: 1px;"><div class="codeContent panelContent">
+<pre class="code-java">
+$ git checkout -b release-1.2 develop
+Switched to a <span class="code-keyword">new</span> branch <span class="code-quote">"release-1.2"</span>
+$ ./bump-version.sh 1.2
+Files modified successfully, version bumped to 1.2.
+$ git commit -a -m <span class="code-quote">"Bumped version number to 1.2"</span>
+[release-1.2 74d9424] Bumped version number to 1.2
+1 files changed, 1 insertions(+), 1 deletions(-)
+$
+</pre>
+</div></div> </th>
+</tr>
+</tbody></table>
+</div>
+
+<script type='text/javascript'> <!-- 
+var columnTypes = ['S'];
+var columnAttributes = '';
+customizeMacroTable('TBL1404309614333', columnTypes, 1, 'lightgoldenrodyellow', true, 'Click to sort', '', false, false, false, true, 0, false, '' );
+//-->
+ </script> </p>
+
+<p>After creating a new branch and switching to it, we bump the version number. Here, bump-version.sh is a fictional shell script that changes some files in the working copy to reflect the new version. (This can of course be a manual change---the point being that some files change.) Then, the bumped version number is committed.</p>
+
+<p>This new branch may exist there for a while, until the release is rolled out in the Production Environment. During that time, bug fixes may be applied in this branch (as well as the develop branch). <font color="red"><b>Adding large new features here is strictly prohibited. They must be merged into the develop branch, and therefore, wait for the next scheduled release.</b></font></p>
+
+<p>h7. Merging a release branch</p>
+
+<p>When the state of the release branch is ready to become a real release, some actions need to be carried out. First, the release branch is merged into master, since every commit on master is a new release by definition. Next, that commit on master must be tagged for easy future reference to this historical version. Finally, the changes made on the release branch need to be merged back into the develop branch so that future releases will also contain any applied bug fixes.</p>
+
+<p>The first two steps:</p>
+
+<p><div class='table-wrap'>
+
+<table id='TBL1404309614334' border='2' width='350' class='confluenceTable'><tbody>
+<tr>
+<th class='confluenceTh'> <div class="code panel" style="border-width: 1px;"><div class="codeContent panelContent">
+<pre class="code-java">
+$ git checkout master
+Switched to branch 'master'
+$ git merge --no-ff release-1.2
+Merge made by the 'recursive' strategy.
+ License    | 3 +++
+ readme.txt | 2 ++
+ test.rb    | 2 ++
+ 3 files changed, 7 insertions(+)
+$
+</pre>
+</div></div> </th>
+</tr>
+</tbody></table>
+</div>
+
+<script type='text/javascript'> <!-- 
+var columnTypes = ['S'];
+var columnAttributes = '';
+customizeMacroTable('TBL1404309614334', columnTypes, 1, 'lightgoldenrodyellow', true, 'Click to sort', '', false, false, false, true, 0, false, '' );
+//-->
+ </script> </p>
+
+<p>The release is now done, and tagged for future reference.<br/>
+Edit: You might as well want to use the &#45;s or &#45;u &lt;key&gt; flags to sign your tag cryptographically.</p>
+
+<p>To keep the changes made in the release branch, we need to merge those back into the develop branch:</p>
+
+<p><div class='table-wrap'>
+
+<table id='TBL1404309614335' border='2' width='350' class='confluenceTable'><tbody>
+<tr>
+<th class='confluenceTh'> <div class="code panel" style="border-width: 1px;"><div class="codeContent panelContent">
+<pre class="code-java">
+$ git checkout develop
+Switched to branch 'develop'
+$ git merge --no-ff release-1.2
+Merge made by recursive.
+(Summary of changes)
+$
+</pre>
+</div></div> </th>
+</tr>
+</tbody></table>
+</div>
+
+<script type='text/javascript'> <!-- 
+var columnTypes = ['S'];
+var columnAttributes = '';
+customizeMacroTable('TBL1404309614335', columnTypes, 1, 'lightgoldenrodyellow', true, 'Click to sort', '', false, false, false, true, 0, false, '' );
+//-->
+ </script> </p>
+
+<p>This step may well lead to a merge conflict. If so, fix it and commit.</p>
+
+<p>Now we are really done and the release branch may be removed, since we don’t need it anymore:</p>
+
+<p><div class='table-wrap'>
+
+<table id='TBL1404309614336' border='2' width='350' class='confluenceTable'><tbody>
+<tr>
+<th class='confluenceTh'> <div class="code panel" style="border-width: 1px;"><div class="codeContent panelContent">
+<pre class="code-java">
+$ git branch -d release-1.2
+Deleted branch release-1.2 (was 41a3f00).
+$
+</pre>
+</div></div> </th>
+</tr>
+</tbody></table>
+</div>
+
+<script type='text/javascript'> <!-- 
+var columnTypes = ['S'];
+var columnAttributes = '';
+customizeMacroTable('TBL1404309614336', columnTypes, 1, 'lightgoldenrodyellow', true, 'Click to sort', '', false, false, false, true, 0, false, '' );
+//-->
+ </script> </p>
+
+<h6><a name="EM%26MGitUsersGuide-HotfixBranches"></a>Hotfix Branches</h6>
+
+<p>May branch off from: master<br/>
+Must merge back into: develop and master<br/>
+Branch naming convention: hotfix-[Major].[Minor].[hf#]<br/>
+<b>Notes:</b></p>
+<ol>
+	<li>If there is an active, in-progress release branch, merging should be considered depending on current state of major branches.</li>
+	<li>hf# - HotFix number. Increments for each hotfix of a given Major.Minor release.</li>
+</ol>
+
+
+<p>Hotfix branches are very much like release branches in that they are also meant to prepare for a new production release, albeit unplanned. They arise from the necessity to act immediately upon an undesired state of a live production version. When a critical bug in a production version must be resolved immediately, a hotfix branch may be branched off from the corresponding tag on the master branch that marks the production version.</p>
+
+<p>The essence is that work of team members (on the develop branch) can continue, while another person is preparing a quick production fix.</p>
+
+<p>When merging a hotfix branch into the development branch, it must be coordinated with the assigned development lead. When merging a hotfix branch into the master branch, it is performed by the Configuration Management team, coordinated with the affected development leads, and coordinated with the EM&amp;M release team and Comcast National Change Management (NCM) via an NCM CM and a EM&amp;M "Go No Go" meeting.  If there is a release branch in progress at the time the hotfix is merged into the master branch, the hotfix may also need to be merged into the release branch depending on the current release in progress circumstances.</p>
+
+<p>h7. Creating the hotfix branch</p>
+
+<p>Hotfix branches are created from the master branch. For example, say version 1.2 is the current production release running live and causing troubles due to a severe bug. The changes on the develop branch are currently unstable. We may then branch off a hotfix branch and start fixing the problem:</p>
+
+<p><div class='table-wrap'>
+
+<table id='TBL1404309614337' border='2' width='350' class='confluenceTable'><tbody>
+<tr>
+<th class='confluenceTh'> <div class="code panel" style="border-width: 1px;"><div class="codeContent panelContent">
+<pre class="code-java">
+$ git checkout -b hotfix-1.2.1 master
+Switched to a <span class="code-keyword">new</span> branch <span class="code-quote">"hotfix-1.2.1"</span>
+$ ./bump-version.sh 1.2.1
+Files modified successfully, version bumped to 1.2.1.
+$ git commit -a -m <span class="code-quote">"Bumped version number to 1.2.1"</span>
+[hotfix-1.2.1 41e61bb] Bumped version number to 1.2.1
+1 files changed, 1 insertions(+), 1 deletions(-)
+$
+</pre>
+</div></div> </th>
+</tr>
+</tbody></table>
+</div>
+
+<script type='text/javascript'> <!-- 
+var columnTypes = ['S'];
+var columnAttributes = '';
+customizeMacroTable('TBL1404309614337', columnTypes, 1, 'lightgoldenrodyellow', true, 'Click to sort', '', false, false, false, true, 0, false, '' );
+//-->
+ </script> </p>
+
+<p>Don’t forget to bump the version number after branching off&#33;</p>
+
+<p>Then, fix the bug and commit the fix in one or more separate commits.</p>
+
+<p><div class='table-wrap'>
+
+<table id='TBL1404309614338' border='2' width='350' class='confluenceTable'><tbody>
+<tr>
+<th class='confluenceTh'> <div class="code panel" style="border-width: 1px;"><div class="codeContent panelContent">
+<pre class="code-java">
+$ git commit -m <span class="code-quote">"Fixed severe production problem(hotfix-1.2.1"</span>
+[hotfix-1.2.1 cd3ebfe] Fixed severe production problem(hotfix-1.2.1
+ 1 file changed, 1 insertion(+)
+$
+</pre>
+</div></div> </th>
+</tr>
+</tbody></table>
+</div>
+
+<script type='text/javascript'> <!-- 
+var columnTypes = ['S'];
+var columnAttributes = '';
+customizeMacroTable('TBL1404309614338', columnTypes, 1, 'lightgoldenrodyellow', true, 'Click to sort', '', false, false, false, true, 0, false, '' );
+//-->
+ </script> </p>
+
+<p>h7. Merging the hotfix branch</p>
+
+<p>When finished, the bugfix needs to be merged back into the master branch, but also needs to be merged back into the develop branch. This ensures the bugfix is included in the next release. This is completely similar to how release branches are finished.</p>
+
+<p>First, update master and tag the release.</p>
+
+<p><div class='table-wrap'>
+
+<table id='TBL1404309614339' border='2' width='350' class='confluenceTable'><tbody>
+<tr>
+<th class='confluenceTh'> <div class="code panel" style="border-width: 1px;"><div class="codeContent panelContent">
+<pre class="code-java">
+$ git checkout master
+Switched to branch 'master'
+$ git merge --no-ff hotfix-1.2.1
+Merge made by the 'recursive' strategy.
+ License | 1 +
+ 1 file changed, 1 insertion(+)
+$ git tag -a 1.2.1 -m <span class="code-quote">"<span class="code-keyword">new</span> tag"</span>
+$
+</pre>
+</div></div> </th>
+</tr>
+</tbody></table>
+</div>
+
+<script type='text/javascript'> <!-- 
+var columnTypes = ['S'];
+var columnAttributes = '';
+customizeMacroTable('TBL1404309614339', columnTypes, 1, 'lightgoldenrodyellow', true, 'Click to sort', '', false, false, false, true, 0, false, '' );
+//-->
+ </script> </p>
+
+<p>Edit: You might as well want to use the &#45;s or &#45;u &lt;key&gt; flags to sign your tag cryptographically.</p>
+
+<p>Next, include the bugfix in develop, too:</p>
+
+<p><div class='table-wrap'>
+
+<table id='TBL1404309614340' border='2' width='350' class='confluenceTable'><tbody>
+<tr>
+<th class='confluenceTh'> <div class="code panel" style="border-width: 1px;"><div class="codeContent panelContent">
+<pre class="code-java">
+$ git checkout develop
+Switched to branch 'develop'
+$ git merge --no-ff hotfix-1.2.1
+Merge made by the 'recursive' strategy.
+ License | 1 +
+ 1 file changed, 1 insertion(+)
+$
+</pre>
+</div></div> </th>
+</tr>
+</tbody></table>
+</div>
+
+<script type='text/javascript'> <!-- 
+var columnTypes = ['S'];
+var columnAttributes = '';
+customizeMacroTable('TBL1404309614340', columnTypes, 1, 'lightgoldenrodyellow', true, 'Click to sort', '', false, false, false, true, 0, false, '' );
+//-->
+ </script> </p>
+
+<p>The one exception to the rule here is that, when a release branch currently exists, the hotfix changes need to be merged into that release branch, instead of the develop branch. Back-merging the bugfix into the release branch will eventually result in the bugfix being merged into develop too, when the release branch is finished. (If work in the develop branch requires this bugfix and cannot wait for the release branch to be finished, you can merge the bugfix into the develop branch immediately.)</p>
+
+<p>Finally, remove the temporary branch:</p>
+
+<p><div class='table-wrap'>
+
+<table id='TBL1404309614341' border='2' width='350' class='confluenceTable'><tbody>
+<tr>
+<th class='confluenceTh'> <div class="code panel" style="border-width: 1px;"><div class="codeContent panelContent">
+<pre class="code-java">
+$ git branch -d hotfix-1.2.1
+Deleted branch hotfix-1.2.1 (was cd3ebfe).
+$
+</pre>
+</div></div> </th>
+</tr>
+</tbody></table>
+</div>
+
+<script type='text/javascript'> <!-- 
+var columnTypes = ['S'];
+var columnAttributes = '';
+customizeMacroTable('TBL1404309614341', columnTypes, 1, 'lightgoldenrodyellow', true, 'Click to sort', '', false, false, false, true, 0, false, '' );
+//-->
+ </script> </p>
+
+<p><font color="red"><b>Please be sure you have reviewed the Standards section above in the Overview section of this document before moving on from this point.</b></font></p>
+
+<h4><a name="EM%26MGitUsersGuide-ReleaseTags"></a>Release Tags</h4>
+
+<p>Release and HotFix branches are tagged at the time they are deployed for future historical reference purposes. These tags are used to identify the current Repo Release in the Production Environment and the HotFixes association to each Repo Release.</p>
+
+<p>The components of the Release Tags are as follows:</p>
+
+<p><b>ModuleName</b> &#45; The name of the Git repo being released from. The Git repo name is the EM&amp;M Module it supports. See following section on EM&amp;M Modules for how the EM&amp;M Module name is constructed.<br/>
+<b>Major</b> &#45; A numeric integer used when tagging a release. A major release identifier typically indicates no backward compatibility with previous decremented major values. MAJOR version numbers are designed to be incremented for identified full release.<br/>
+<b>Minor</b> &#45; A numeric integer used when tagging a minor release. A minor release identifier typically indicates backward compatibility with previous decremented minor values. MINOR version numbers are designed to be incremented for identified minor releases.<br/>
+<b>HotFix#</b> &#45; Number incremented for each HotFix applied to a given Major.Minor release.<br/>
+*Note:" - A release tag composed of Major.Minor with no HotFix number indicates no HotFix has been applied.</p>
+
+
+<h4><a name="EM%26MGitUsersGuide-EM%26MModulesinGit"></a>EM&amp;M Modules in Git</h4>
+
+<p>In this organization, a Git repository <b>Module Name</b> consists of the following elements:</p>
+<ul>
+	<li><b>LOB</b> &#45; Line of Business, one of CFX, DATA, VOICE, and VIDEO</li>
+	<li><b>Project</b> &#45; Examples include AccountManagement, ADOPTOUT, AMDOCSOUT, ASTRO, AuditService, AUPM, AutoGen, BEACON, BlockingService, BPM, CANOE, CDV, CEMP, CIMCO, CLK, CloudUI, CMS, COLUMBUS, ContractAutomation, CPORTAL, CSG, CustMove, CycleChange, DDS, EEG, EEP, EEPBill, EMARS, EM&amp;M, EST, FRAUD, HSD, HSI, IMS, ITV, JANUS, LCR, LDC, LEGAL, MANILA, NASR, NGT, ODS, OSM, PREPAID, RAZOR, SAP, SAVILLE, SDV, TVE, UES, UID, VAPI, VCME, VGD, VODGift, WaterMark, WHOLESALE, WIFI, WLS, XTM</li>
+</ul>
+
+
+<h4><a name="EM%26MGitUsersGuide-DeveloperDeploymentBranches"></a>Developer Deployment Branches</h4>
+
+<p>The format of the developer deployment branch name is <b>[ModuleName]_N_N_N_N</b> where each "n" is a nummeric increment for Major, Minor, Development, QA. EM&amp;M Intake system record numbers and Deployment branches are used to manage EM&amp;M deployments from development, to QA, Test, and Production environments. The <a href="https://wiki.io.comcast.net/display/CEMP/JIRA+CEMPCM+Workflow">EM&amp;M Workflow</a> describes how this is managed.</p>
+
+<p>The EM&amp;M Module Release Tag identifies a specific Deployment set that is developed, tested, and released to EM&amp;M QA, Test, and Production environments. Each number in the Module Release Tag has a specific meaning to identify specific set of elements in support of the EM&amp;M Workflow for design, development, test, deploy, and production deployment.</p>
+
+<ul>
+	<li><b>Major</b> &#45; A numeric integer used when tagging a module. A major module identifier typically indicates no backward compatibility with previous decremented major values. MAJOR version numbers are designed to be incremented for every full release of the module.</li>
+</ul>
+
+
+<ul>
+	<li><b>Minor</b> &#45; A numeric integer that indicates a partial release to most recent MAJOR_MINOR release set. For example, release “2_22” would represent a delta that is added to release “2_21”. Dependency to the previous MINOR number with a common MAJOR version number is assumed. Any other dependencies are documented in the install or design documents by the developer.</li>
+</ul>
+
+
+<ul>
+	<li><b>DEV</b> &#45; Numeric increment for each version of the MAJOR_MINOR release delivered by EM&amp;M Development, initially set to “0” on first delivery of a Major_Minor identified module. If requirement change or development needs to deliver another version, this number is incremented, and the Test number is set to "0". Separate instructions from the install doc can be included with the build request for the QA environment. This would account for deltas that have changed since the QA install has already been done in the previous version.</li>
+</ul>
+
+
+<ul>
+	<li><b>Test</b> &#45; Numeric increment for each version of the MAJOR_MINOR_DEV release delivered by EM&amp;M Development, initially set to “0”.<br/>
+If EM&amp;M QA/Test drafts a defect for a MAJOR_MINOR_DEV_Test delivered and installed, the “Test” value is incremented by development for the next delivery addressing the defect. Separate instructions from the install doc can be included with the build request for the QA environment. This would account for deltas that have changed since the QA install has already been done in the previous version.</li>
+</ul>
+
+
+<h2><a name="EM%26MGitUsersGuide-UsefulCommandSyntax"></a>Useful Command Syntax</h2>
+
+<div class='table-wrap'>
+<table class='confluenceTable'><tbody>
+<tr>
+<th class='confluenceTh'>Syntax</th>
+<th class='confluenceTh'>Comments</th>
+</tr>
+<tr>
+<td class='confluenceTd'>git diff master origin/master</td>
+<td class='confluenceTd'> After "git fetch origin", shows difference between master branch and branch on emm-git repository (origin).</td>
+</tr>
+<tr>
+<td class='confluenceTd'>git log --pretty=oneline --graph --decorate</td>
+<td class='confluenceTd'>Report representation of current repo. (May need to send to tmp file to see full report - &gt;&gt; tmp.txt)</td>
+</tr>
+<tr>
+<td class='confluenceTd'>gitk</td>
+<td class='confluenceTd'>Visual representation of current repo.</td>
+</tr>
+</tbody></table>
+</div>
+
+
+<h2><a name="EM%26MGitUsersGuide-CheatSheets"></a>Cheat Sheets</h2>
+
+<p>Following are "Cheat Sheets" of tools you will use often in this environment:</p>
+<div class='table-wrap'>
+<table class='confluenceTable'><tbody>
+<tr>
+<th class='confluenceTh'>Git Branching/Merging Model</th>
+</tr>
+<tr>
+<td class='confluenceTd'>	
+<object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" id="Slides" width="632" height="507">
+            <param name="movie" value="/s/2036/44/1.15/_/download/resources/com.atlassian.confluence.extra.officeconnector:pptslideservlet/conversion/Slides.swf" />
+            <param name="quality" value="high" />
+            <param name="bgcolor" value="#ffffff" />
+            <param name="allowScriptAccess" value="sameDomain" />
+            <param name="allowFullScreen" value="true" />
+            <param name="flashVars" value="usePathAuth=false&downloadPath=/download/attachments/227392710/Git-branching-model.pdf&allowEdit=true&pageId=227392710&attachment=Git-branching-model.pdf&attachmentId=233014547&editUrl=%2Fplugins%2Fservlet%2Fconfluence%2Feditinword%2F227392710%2Fattachments%2FGit-branching-model.pdf&baseUrl=https%3A%2F%2Fwiki.io.comcast.net&contextPath="/>
+            
+     		<!--[if !IE]>-->
+	<object type="application/x-shockwave-flash" data="/s/2036/44/1.15/_/download/resources/com.atlassian.confluence.extra.officeconnector:pptslideservlet/conversion/Slides.swf" width="632" height="507">	
+            <param name="quality" value="high" />
+            <param name="bgcolor" value="#ffffff" />
+            <param name="allowScriptAccess" value="sameDomain" />
+            <param name="allowFullScreen" value="true" />
+            <param name="flashVars" value="usePathAuth=false&downloadPath=/download/attachments/227392710/Git-branching-model.pdf&allowEdit=true&pageId=227392710&attachment=Git-branching-model.pdf&attachmentId=233014547&editUrl=%2Fplugins%2Fservlet%2Fconfluence%2Feditinword%2F227392710%2Fattachments%2FGit-branching-model.pdf&baseUrl=https%3A%2F%2Fwiki.io.comcast.net&contextPath="/>
+            
+	<!--<![endif]-->
+	<div>You need flash player installed to preview ppt and pdf files</div>
+	<div>		
+		<p><a href="http://www.adobe.com/go/getflashplayer"><img src="http://www.adobe.com/images/shared/download_buttons/get_flash_player.gif" alt="Get Adobe Flash player" /></a></p>
+	</div>
+	<!--[if !IE]>-->
+	</object>
+	<!--<![endif]-->
+</object>
+
+</td>
+</tr>
+</tbody></table>
+</div>
+
+
+<div class='table-wrap'>
+<table class='confluenceTable'><tbody>
+<tr>
+<th class='confluenceTh'>&nbsp;</th>
+<th class='confluenceTh'> vim </th>
+<th class='confluenceTh'> git </th>
+<th class='confluenceTh'> git </th>
+</tr>
+<tr>
+<td class='confluenceTd'>&nbsp;</td>
+<td class='confluenceTd'> <span class="image-wrap" style=""><a class="confluence-thumbnail-link 1024x724" href='https://wiki.io.comcast.net/download/attachments/227392710/vi-vim-cheat-sheet.gif'><img src="/download/thumbnails/227392710/vi-vim-cheat-sheet.gif" style="border: 1px solid black" /></a></span> </td>
+<td class='confluenceTd'> <span class="image-wrap" style=""><a class="confluence-thumbnail-link 2600x1838" href='https://wiki.io.comcast.net/download/attachments/227392710/git_workflow_and_cheat_sheet.png'><img src="/download/thumbnails/227392710/git_workflow_and_cheat_sheet.png" style="border: 1px solid black" /></a></span> </td>
+<td class='confluenceTd'> <span class="image-wrap" style=""><a class="confluence-thumbnail-link 713x577" href='https://wiki.io.comcast.net/download/attachments/227392710/git_functions.PNG'><img src="/download/thumbnails/227392710/git_functions.PNG" style="border: 1px solid black" /></a></span> </td>
+</tr>
+</tbody></table>
+</div>
+
+
+<p><a href="http://jan-krueger.net/wordpress/wp-content/uploads/2007/09/git-cheat-sheet.pdf">Git Cheat Sheet</a> by Jan Krueger.</p>
+
+<p><a href="http://www.cheat-sheets.org/saved-copy/git-cheat-sheet.pdf">Git Cheat Sheet</a> by Zack Rusin.</p>
+
+<h2><a name="EM%26MGitUsersGuide-UsefulLinks"></a>Useful Links</h2>
+
+<p><a href="http://sethrobertson.github.io/GitBestPractices/">Commit Often, Perfect Later, Publish Once: Git Best Practices</a><br/>
+<a href="http://en.wikipedia.org/wiki/Git_(software)">Git Software</a><br/>
+<a href="http://en.wikipedia.org/wiki/File:Git_operations.svg">Git Operations</a><br/>
+<a href="http://gitref.org/">Git reference</a><br/>
+<a href="http://eagain.net/articles/git-for-computer-scientists/">Git for Computer Scientists</a><br/>
+<a href="http://www.sbf5.com/~cduan/technical/git/">Understanding Git Conceptually</a><br/>
+<a href="http://longair.net/blog/2009/04/16/git-fetch-and-merge/">git fetch and merge, don't pull</a></p>
+    </body>
+</html>
