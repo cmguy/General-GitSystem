@@ -1,0 +1,16 @@
+2014-07-31  	v1.0    	First release to the master branch.
+				This is the first release of this repo.
+				Note there is dependencies on the Confluence
+				wiki system for the admin and users guides
+				for this system.
+
+				This release was completed/exercised to begin
+				testing of the backup/restore code and exercise of the
+				branching and merging tasks.
+				
+				The following is still required: (Known issues)
+				A) Testing and validation of gitolite ssh shell functions
+				B) Backup/restore code, testing, and validation
+				C) Testing and validation of branching and merging as
+				   described in the user guide.
+					
