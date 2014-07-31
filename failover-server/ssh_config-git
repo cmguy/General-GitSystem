@@ -1,0 +1,36 @@
+#################################################################
+#################################################################
+#################################################################
+### EMM Git System SSH Client Config file                     ###
+###                                                           ###
+### This code block required for EEM Git user System Access   ###
+### between the primary and failover servers.                 ###
+###                                                           ###
+### http://emm-git1.sys.comcast.net (primary server)          ###
+### http://emm-git2.sys.comcast.net (fail-over server)        ###
+###                                                           ###
+### This code block required for the system backup and        ###
+### restore procedure from the primary to the failover        ###
+### servers.                                                  ###
+###                                                           ###
+### DISCLAIMER:                                               ###
+### This code block not designed to work with wildcard        ###
+### definition for Host (Host *) in the ~/.ssh/config         ###
+### file.                                                     ###
+###                                                           ###
+###                                                           ###
+#################################################################
+Host emm-git primary
+    User git
+    Hostname emm-git1.sys.comcast.net
+    Port 22
+    IdentityFile ~/.ssh/git
+
+#Host emm-gitA fail-over
+#    User git
+#    Hostname emm-git2.sys.comcast.net
+#    Port 22
+#    IdentityFile ~/.ssh/git
+
+#################################################################
+#################################################################

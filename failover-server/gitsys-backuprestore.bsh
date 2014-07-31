@@ -1,0 +1,121 @@
+#!/bin/bash         
+######################################################################################
+# gitsys-backuprestore.bsh
+#
+#  Written by Andy Wallace 07/28/14
+#
+#  Purpose:
+#
+#  This script is designed to backup and restore the primary server to
+#  the failover server of the EMM Git Repo System. It is designed to run from the
+#  failover server as the cmadmin userid using Git utilities.
+#
+#  Backups for recovery of objects that have been removed will also be maintained
+#  for three days, four weeks, and monthly for one year.
+#
+#  Dependencies:
+#
+#    1. ~/cmadmin/.ssh/config file is required for this script to run with an admin ssh
+#       key setup accordingly.
+#    2. Crontab for ~/cmadmin on failover server of EMM Git System.
+#
+#  Usage: 
+#    Intended to run from cmadmin crontab. For trouble shooting, verbose argument
+#    is available adding more to the log file (reference variable GitBackupLog).
+#      $ gitsystem-backup.bsh [-v]
+#
+#  Utilities used:  (Under consideration - documentation via git-scm.com/docs/git-[gc|repack|bundle])
+#
+#     gitolite writable -h (Must be logged on as userid git on repo server.) 
+#           Disable/re-enable pushes to all repos or named repo.  Useful to run
+#           non-git-aware backups and so on.
+#
+#     git-gc(1)
+#           Cleanup unnecessary files and optimize the local repository.
+#
+#     git-repack(1)
+#           Pack unpacked objects in a repository.
+#
+#     git-bundle(1)
+#           Move objects and refs by archive - Considering this for backups to
+#            be held for 3 days, 4 weekly's, and Monthly backups to be held for 1 year.
+#
+#  Files used:
+#
+#     .failoverRepos
+#           List of git repos on the failover server before backup and restore.
+#
+#     .primaryRepos
+#           List of git repos on the primary server before backup and restore.
+#
+#  Variables used:
+#   
+#     FailOverRepoDIR
+#           FailOver server repository directory.
+#
+#     PrimaryRepoDIR
+#           Primary server repository directory.
+#
+#     PrimarySSHalias
+#          The ssh alias used to access the primary server. Defined in the
+#          ~/.ssh/config file.
+#
+#     GitBackupLog
+#          Path and filename of log for EMM Git System backups, this script.
+#
+######################################################################################
+
+FailOverRepoDIR="/home/git/repositories"
+PrimaryRepoDIR="/home/git/repositories"
+PrimarySSHalias="primary"
+GitBackupLog="/home/cmadmin/log/gitbackup_"
+
+# Process script arguments
+if [ "$#" -eq "0" ]; then
+   echo "EMM Git System Primary to failover Backup run `date +%F`." > $GitBackupLog`date +%F`.log 2>&1
+elif [ "$#" -gt "1" ]; then
+   echo "Invalid argument set. For help - ./gitsys-backuprestore.bsh -h"
+   exit 1
+fi
+if [ "$#" -eq "1" ]; then
+   if [ "$1" == "-v" ]; then
+       echo "Testing Backup script /home/cmadmin/bin/gitsystem" > $GitBackupLog`date +%F`.log 2>&1
+   elif [ "$1" == "-h" ]; then
+       echo "Valid arguments are -v or -h."
+       exit 0
+   else
+       echo "Invalid argument $1. For help - ./gitsys-backuprestore.bsh -h"
+       exit 1
+   fi
+fi
+
+cd $FailOverRepoDIR
+
+if [ "$#" -eq "1" ]; then
+   echo "Get failover repo list..." >> $GitBackupLog`date +%F`.log 2>&1
+   ls -F . | grep .git/ > /tmp/.failoverRepos >> $GitBackupLog`date +%F`.log 2>&1
+   echo "Get primary repo list..." >> $GitBackupLog`date +%F`.log 2>&1
+   ssh -n $PrimarySSHalias ls -F $PrimaryRepoDIR/. >> $GitBackupLog`date +%F`.log 2>&1 | grep .git/ > /tmp/.primaryRepos >> $GitBackupLog`date +%F`.log 2>&1
+fi
+if [ "$#" -eq "0" ]; then
+   echo "Get failover repo list..." >> $GitBackupLog`date +%F`.log 2>&1
+   ls -F . | grep / > /tmp/.failoverRepos
+   echo "Get primary repo list..." >> $GitBackupLog`date +%F`.log 2>&1
+   ssh -n $PrimarySSHalias ls -F $PrimaryRepoDIR/. 2>> $GitBackupLog`date +%F`.log | grep / > /tmp/.primaryRepos
+fi
+
+echo "git clone new repos since last run..." >> $GitBackupLog`date +%F`.log 2>&1
+
+#diff /tmp/.failoverrepos /tmp/.primaryrepos | egrep '^>' |
+#   while read x f; do
+#     git clone --bare --mirror $PrimarySSHalias:/$$f $$f
+#   done
+#   else
+#   echo "No new repos to clone..."
+#   done
+#   
+#rm -f /tmp/.failoverRepos /tmp/.primaryRepos
+echo "git fetch all repos..." >> $GitBackupLog`date +%F`.log 2>&1
+# for f in */.; do (cd $$f; echo $$f; git fetch); done
+
+exit 0
