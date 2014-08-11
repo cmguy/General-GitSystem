@@ -1,0 +1,41 @@
+On branch develop
+Your branch is up-to-date with 'origin/develop'.
+
+Changes not staged for commit:
+  (use "git add/rm <file>..." to update what will be committed)
+  (use "git checkout -- <file>..." to discard changes in working directory)
+
+	deleted:    ../CEMP-227392710-300714-1436-69.pdf
+	deleted:    ../CEMP-GitRepoSystemAdminGuide-300714-1436-71.pdf
+	modified:   ../CHANGELOG
+	deleted:    ../GitSW/git-1.9.0.tar.gz
+	deleted:    ../GitSW/git-logo.png
+	deleted:    ../GitSW/git-manpages-1.9.0.tar.gz
+	deleted:    ../failover-server/README.txt
+	deleted:    ../failover-server/gitsys-backuprestore.bsh
+	deleted:    ../failover-server/index.html
+	deleted:    ../failover-server/issue
+	deleted:    ../failover-server/issue.net
+	deleted:    ../failover-server/noindex.html
+	deleted:    ../failover-server/repository.conf
+	deleted:    ../failover-server/ssh_config-git
+	deleted:    ../git
+	deleted:    ../git-logo.png
+	deleted:    ../git.pub
+	deleted:    ../gitolite-3.6.1.zip
+	deleted:    ../gitweb-logo.png
+	deleted:    ../primary-server/README.txt
+	deleted:    ../primary-server/index.html
+	deleted:    ../primary-server/issue
+	deleted:    ../primary-server/issue.net
+	deleted:    ../primary-server/noindex.html
+	deleted:    ../primary-server/repository.conf
+	deleted:    ../primary-server/ssh_config-git
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+
+	./
+	../doc/
+
+no changes added to commit (use "git add" and/or "git commit -a")

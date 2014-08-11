@@ -1,3 +1,18 @@
+2014-08-??	v1.1		Build: CFX-EMM-GITSystem_1_1
+			Description:
+				Current test run of CFX_EMM_GITSystem repo through deployment workflow as defined
+				in the user guide.
+			Change Records/Bugs/Defects:
+				None identified.
+			Known Issues:
+				A) Testing and validation of gitolite ssh shell functions.
+				B) Backup/restore code, testing, and validation.
+				C) Testing and validation of branching and merging as
+				   described in the user guide.
+			Enhancements:
+				Added template for making entries to this file called CHANGELOG.template.
+			New Features:
+				None identified.
 2014-07-31  	v1.0    	First release to the master branch.
 				This is the first release of this repo.
 				Note there is dependencies on the Confluence
