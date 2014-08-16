@@ -12,6 +12,9 @@
 
 				Unit testing and validation of gitolite ssh shell functions.
 
+				Setup new ssh key pair for git user on both primary and fail-over
+				servers.
+
 			Change Records/Bugs/Defects:
 				None identified.
 				
@@ -21,6 +24,7 @@
 				   described in the user guide.
 				C) Need to add build/deployment automation.
 				D) Need to update and test for handling module and sub-modules.
+				E) Need to incorporate usage of getopts for managing script arguments.
 
 			Enhancements:
 				Added template for making entries to this file called

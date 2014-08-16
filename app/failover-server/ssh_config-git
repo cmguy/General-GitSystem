@@ -26,11 +26,11 @@ Host emm-git primary
     Port 22
     IdentityFile ~/.ssh/git
 
-#Host emm-gitA fail-over
-#    User git
-#    Hostname emm-git2.sys.comcast.net
-#    Port 22
-#    IdentityFile ~/.ssh/git
+Host emm-gitA fail-over
+    User git
+    Hostname emm-git2.sys.comcast.net
+    Port 22
+    IdentityFile ~/.ssh/git
 
 #################################################################
 #################################################################

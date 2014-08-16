@@ -2,25 +2,26 @@
 ######################################################################################
 # gitsys-backuprestore.bsh
 #
-#  Written by Andy Wallace 07/28/14
+#  Written by Andy Wallace 08/11/14
 #
 #  Purpose:
 #
 #  This script is designed to backup and restore the primary server to
 #  the failover server of the EMM Git Repo System. It is designed to run from the
-#  failover server as the cmadmin userid using Git utilities.
+#  failover server as the git userid using Git and Gitolite utilities.
 #
 #  Backups for recovery of objects that have been removed will also be maintained
 #  for three days, four weeks, and monthly for one year.
 #
 #  Dependencies:
 #
-#    1. ~/cmadmin/.ssh/config file is required for this script to run with an admin ssh
-#       key setup accordingly.
-#    2. Crontab for ~/cmadmin on failover server of EMM Git System.
+#    1. ~/git/.ssh/config file is required for this script to run with an admin ssh
+#       key setup accordingly on both system servers (primary/fail-over).
+#    2. Crontab for ~/git on failover server of EMM Git System.
+#    3. Write/read access to server ~/log directory.
 #
 #  Usage: 
-#    Intended to run from cmadmin crontab. For trouble shooting, verbose argument
+#    Intended to run from git crontab. For trouble shooting, verbose argument
 #    is available adding more to the log file (reference variable GitBackupLog).
 #      $ gitsystem-backup.bsh [-v]
 #
@@ -53,6 +54,13 @@
 #     FailOverRepoDIR
 #           FailOver server repository directory.
 #
+#     FailOverSSHalias
+#          The ssh alias used to access the fail-over server. Defined in the
+#          ~/.ssh/config file.
+#
+#     GitBackupLog
+#          Path and filename of log for EMM Git System backups, this script.
+#
 #     PrimaryRepoDIR
 #           Primary server repository directory.
 #
@@ -60,62 +68,93 @@
 #          The ssh alias used to access the primary server. Defined in the
 #          ~/.ssh/config file.
 #
-#     GitBackupLog
-#          Path and filename of log for EMM Git System backups, this script.
-#
 ######################################################################################
 
 FailOverRepoDIR="/home/git/repositories"
+GitBackupLog="gitbackup"
+LogDIR="/home/git/log"
 PrimaryRepoDIR="/home/git/repositories"
 PrimarySSHalias="primary"
-GitBackupLog="/home/cmadmin/log/gitbackup_"
+FailOverSSHalias="fail-over"
+ThisScript="/home/git/bin/cmsys-backuprestore.bsh"
+LogFile="$LogDIR/$GitBackupLog"
 
 # Process script arguments
 if [ "$#" -eq "0" ]; then
-   echo "EMM Git System Primary to failover Backup run `date +%F`." > $GitBackupLog`date +%F`.log 2>&1
+   /bin/echo "`date +%c` EMM Git System Primary to failover Backup run start." > $LogDIR/.running.log 2>&1
 elif [ "$#" -gt "1" ]; then
-   echo "Invalid argument set. For help - ./gitsys-backuprestore.bsh -h"
+   /bin/echo ""
+   /bin/echo "Invalid argument set. For help execute " $ThisScript " -h"
+   /bin/echo ""
+/bin/echo "greater than 1 argument"
    exit 1
 fi
 if [ "$#" -eq "1" ]; then
    if [ "$1" == "-v" ]; then
-       echo "Testing Backup script /home/cmadmin/bin/gitsystem" > $GitBackupLog`date +%F`.log 2>&1
+       /bin/echo "`date +%c` Testing Backup script " $ThisScript > $LogDIR/.running.log 2>&1
    elif [ "$1" == "-h" ]; then
-       echo "Valid arguments are -v or -h."
+       /bin/echo ""
+       /bin/echo "usage: $ThisScript [-v|-h]"
+       /bin/echo ""
+       /bin/echo "This script is designed to backup and restore the primary server to"
+       /bin/echo "the failover server of the EMM Git Repo System. It is designed to run from the"
+       /bin/echo "failover server as the git userid using Git and Gitolite utilities."
+       /bin/echo ""
+       /bin/echo "Backups for recovery of objects that have been removed will also be maintained:"
+       /bin/echo "for three days, four weeks, and monthly for one year."
+       /bin/echo "for further details, see $ThisScript preamble."
+       /bin/echo ""
        exit 0
    else
-       echo "Invalid argument $1. For help - ./gitsys-backuprestore.bsh -h"
-       exit 1
+       /bin/echo ""
+       /bin/echo "Invalid argument \"$1\"."
+       /bin/echo "Valid arguments are -v or -h."
+       /bin/echo "-v Verbose mode, sends more information to log files for testing."
+       /bin/echo "For help execute " $ThisScript " -h"
+       /bin/echo ""
+       exit 0
    fi
 fi
 
+# Identify Fail-over and Primary server repos
 cd $FailOverRepoDIR
 
-if [ "$#" -eq "1" ]; then
-   echo "Get failover repo list..." >> $GitBackupLog`date +%F`.log 2>&1
-   ls -F . | grep .git/ > /tmp/.failoverRepos >> $GitBackupLog`date +%F`.log 2>&1
-   echo "Get primary repo list..." >> $GitBackupLog`date +%F`.log 2>&1
-   ssh -n $PrimarySSHalias ls -F $PrimaryRepoDIR/. >> $GitBackupLog`date +%F`.log 2>&1 | grep .git/ > /tmp/.primaryRepos >> $GitBackupLog`date +%F`.log 2>&1
-fi
-if [ "$#" -eq "0" ]; then
-   echo "Get failover repo list..." >> $GitBackupLog`date +%F`.log 2>&1
-   ls -F . | grep / > /tmp/.failoverRepos
-   echo "Get primary repo list..." >> $GitBackupLog`date +%F`.log 2>&1
-   ssh -n $PrimarySSHalias ls -F $PrimaryRepoDIR/. 2>> $GitBackupLog`date +%F`.log | grep / > /tmp/.primaryRepos
+/bin/echo "Get failover repo list..." >> $LogDIR/.running.log 2>&1
+/usr/bin/ssh $FailOverSSHalias info 2>> $LogDIR/.running.log | /bin/grep "R W" | /bin/gawk '{print $3}' -  > $LogDIR/.failoverRepos_running
+/bin/echo "Get primary repo list..." >> $LogDIR/.running.log 2>&1
+#/usr/bin/ssh -n $PrimarySSHalias /bin/ls -F $PrimaryRepoDIR/. 2>> $LogDIR/.running.log | grep .git/ > $LogDIR/.primaryRepos_running
+/usr/bin/ssh $PrimarySSHalias info 2>> $LogDIR/.running.log | /bin/grep "R W" | /bin/gawk '{print $3}' -  > $LogDIR/.primaryRepos_running
+if [ "$1" == "-v" ]; then
+   cat $LogDIR/.primaryRepos_running $LogDIR/.running.log
 fi
 
-echo "git clone new repos since last run..." >> $GitBackupLog`date +%F`.log 2>&1
+/bin/echo "git clone new repos since last run..." >> $LogDIR/.running.log 2>&1
 
-#diff /tmp/.failoverrepos /tmp/.primaryrepos | egrep '^>' |
-#   while read x f; do
-#     git clone --bare --mirror $PrimarySSHalias:/$$f $$f
-#   done
-#   else
-#   echo "No new repos to clone..."
-#   done
-#   
-#rm -f /tmp/.failoverRepos /tmp/.primaryRepos
-echo "git fetch all repos..." >> $GitBackupLog`date +%F`.log 2>&1
-# for f in */.; do (cd $$f; echo $$f; git fetch); done
+/usr/bin/diff $LogDIR/.failoverRepos_running $LogDIR/.primaryRepos_running | egrep '^>' |
+   while read x f; do
+      f=`echo ${f%/}`
+      if [ "$1" == "-v" ]; then
+         /bin/echo "git clone repo " $f;
+      fi
+      /bin/echo "git clone repo " $f >> $LogDIR/.running.log 2>&1
+      /usr/bin/git clone --bare --mirror $PrimarySSHalias:$f >>$LogDIR/.running.log 2>&1
+   done
+
+/bin/mv $LogDIR/.failoverRepos_running  $LogDIR/failoverRepos_`date +%F`_`date +%R`:`date +%S`
+/bin/mv $LogDIR/.primaryRepos_running  $LogDIR/primaryRepos_`date +%F`_`date +%R`:`date +%S`
+
+/bin/echo "git fetch all repos..." >> $LogDIR/.running.log 2>&1
+for f in */.; do 
+   f=`echo ${f%/.}`
+   if [ "$1" == "-v" ]; then
+      /bin/echo "git fetch repo " $f;
+   fi
+   cd $FailOverRepoDIR/$f;
+   /bin/echo "git fetch repo " $f >> $LogDIR/.running.log 2>&1
+   /usr/bin/git fetch --all >> $LogDIR/.running.log 2>&1
+done
+
+echo "`date +%c` EMM Git System Primary to failover Backup run complete." >> $LogDIR/.running.log 2>&1
+/bin/mv $LogDIR/.running.log $LogFile-`date +%F`_`date +%R`:`date +%S`.log
 
 exit 0
