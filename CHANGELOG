@@ -1,8 +1,15 @@
-2014-08-??	v1.1		Build: CFX-EMM-GITSystem_1_1
+2014-09-11	v1.1		Build: CFX-EMM-GITSystem_1_1
 
 			Description:
+			        Completed unit testing of gitsys-failover-mirror.bsh script. 
+				Setup git crontab on fail-over server to run script
+				gitsys-failover-mirror.bsh. Runs Mon-Fri, 8am to 4pm at 15 and
+				30 minutes past each hour MDT. Run Mon-Fri, 9am to 5pm at 15 and
+				30 minutes past each hour MST.
+
 				Currently testing run of CFX_EMM_GITSystem repo through deployment
-				workflow as defined in the user guide.
+				workflow as defined in the user guide. User this repo for this
+				testing.
 
 				Reformatted this entry to match the format described in the CHANGELOG
 				section of the EMM Git User Guide.
@@ -10,28 +17,55 @@
 				Restructed files and directories per the recommendations made in the
 				Deployment Rules section of the EMM Git User Guide.
 
-				Unit testing and validation of gitolite ssh shell functions.
+				Unit tested and validation of gitolite ssh shell functions.
 
 				Setup new ssh key pair for git user on both primary and fail-over
-				servers.
+				servers. This key is gitolite controlled.
+
+				Setup new userid cmadmin with ssh key pair that is not controlled
+				by gitolite. This setup needed to move repo configuration files
+				for gitweb and gitolite functionality in the mirroring script.
+
+				Completed unit test of "Finalize DevLead Repo" procedure.
+
+				Initial Branching/Merging testing as described in the user guide.
+
+				Updated User and Admin guides accordingly.
 
 			Change Records/Bugs/Defects:
 				None identified.
 				
-			Known Issues:
-				A) Backup/restore code, testing, and validation.
+			Known Issues/Plans:
+				A) Full Backups for recovery of objects that have been removed
+				   also needed for weekly, for four weeks, and monthly for one
+				   year.
 				B) Testing and validation of branching and merging as
 				   described in the user guide.
-				C) Need to add build/deployment automation.
+				C) Need to create/test build/deployment automation. Study and
+				   come up to speed on RPM.
 				D) Need to update and test for handling module and sub-modules.
-				E) Need to incorporate usage of getopts for managing script arguments.
+				E) Need to incorporate usage of getopts for managing script
+				   arguments.
+				F) Utilities Under consideration - documentation via
+				     git-scm.com/docs/git-[gc|repack|bundle])
+				   git-gc(1)
+				     Cleanup unnecessary files and optimize the local repository.
+				   git-repack(1)
+				     Pack unpacked objects in a repository.
+				   git-bundle(1)
+				     Move objects and refs by archive - Considering this for
+				     backups to be held for 3 days, 4 weekly's, and Monthly backups
+				     to be held for 1 year.
 
 			Enhancements:
-				Added template for making entries to this file called
-				CHANGELOG.template.
+				Added and completed testing of the "Finalize DevLead Repo" procedure.
 
 			New Features:
-				None identified.
+				1. Mirroring of Git repos on primary server to fail-over server. See
+				   Description section for related crontab configurations.
+				2. Reformatted this CHANGELOG file per instructions in User Guide.
+				3. Restructured directories anf files in this repo per User Guide.
+				4. Configured, added and tested gitolite ssh shell functions.
 
 2014-07-31  	v1.0    	First release to the master branch.
 				This is the first release of this repo.

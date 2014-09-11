@@ -17,7 +17,7 @@ files have been copied to "[filename]-orig" and updated.
 For more details on the administration of this system, refer to
 http://emm-git1.sys.comcast.net/.
 
-Please contact the EM&M organization under Bev Tucker before changing any of this settings.
+Please contact the EM&M organization under Bev Tucker before changing any of these settings.
 
 Regards,
 

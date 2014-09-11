@@ -1,15 +1,15 @@
 YYYY-MM-DD      v1.0            Build ID: [Unique build id sheme] or [repo/module name]_M_m_d_t
 
                         Description:
-				This template identifies the format of a CHANGE log entry for a release
-				of the CFX_EMM_GITSystem repo. The text in this Description and fields
-				definded should be replaced accordingly for the project this template
-				is being used for.
+				This template identifies the format of a CHANGE log entry for a
+				release of the CFX_EMM_GITSystem repo. The text in this Description
+				and fields definded should be replaced accordingly for the project
+				this template is being used for.
 
-				The first line consists of the Date (YYYY-MM-DD), tab, repo release tag
-				(v with Major.Minor increments from previous repo release tag), tab,
-				and Build ID:, uniquely identifies the build that rolled up for this
-				repo release tag.
+				The first line consists of the Date (YYYY-MM-DD), tab, repo release
+				tag (v with Major.Minor increments from previous repo release tag),
+				tab, and Build ID:, uniquely identifies the build that rolled up
+				for this repo release tag.
 					NOTES:
 					1.	The date is the appropriate Target Release Date (TRD)
 						until the "Go No Go" meeting.
@@ -22,20 +22,20 @@ YYYY-MM-DD      v1.0            Build ID: [Unique build id sheme] or [repo/modul
 					3.	For Build ID:, Unique build id scheme not fully
 					        defined. Will likely utilize Git SHA-1 hash and build
 						time stamp. Current available alternate is Module
-						release ID tracked in JIRA record summary field. Module
-						ID tag increments are M=Major, m=minor, d=development,
-						t=test.
+						release ID tracked in JIRA record summary field.
+						Module ID tag increments are M=Major, m=minor,
+						d=development, t=test.
 
 				The components of this change log entry for a given release (i.e.,
 				Description, Change Records/Bugs/Defects, Known Issues, Enhancements,
 				New Features) all start with an entry of "None identified". As the
-				release progresses and is prepared, this record is updated by all team
-				members as required. It is reviewed and completed during the EMM
+				release progresses and is prepared, this record is updated by all
+				team members as required. It is reviewed and completed during the EMM
 				release "Go No Go" meeting when identified for production deployment.
 				
-				In the event of an EBF or hotfix, this record is required. The entries
-				in the component fields of this record need to identify the change for
-				future audit references.
+				In the event of an EBF or hotfix, this record is required. The
+				entries in the component fields of this record need to identify the
+				change for future audit references.
 
 				For an example of a CHANGELOG managed for the gitolite project at
 				github, refer to URL https://github.com/sitaramc/gitolite/.
@@ -43,7 +43,7 @@ YYYY-MM-DD      v1.0            Build ID: [Unique build id sheme] or [repo/modul
 			Change Records/Bugs/Defects:
 		        	None identified.
 
-			Known Issues:
+			Known Issues/Plans:
 		        	None identified.
 
 			Enhancements:
