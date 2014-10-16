@@ -1,3 +1,65 @@
+2014-10-16	v1.2		Build: CFX-EMM-GITSystem_1_2
+
+			Description:
+				Updated Admin and User guides for new user testing and usage. 
+
+				Setup apache so git user can configure and CADA admin access can
+				sudo command all needed apache commands. This removes the need to
+				sudo to root for all anticipated apache maintenance. Admin guide
+				updated accordingly.
+
+				Added CHANGELOG component fields Installations and Access to track
+				iTRC applications, devices, and CADA Host groups for EM&M git repos.
+
+				Upgraded workstation Git for windows from June 11th release to 
+				September 29th release.
+
+				Corrected gitsys-failover-mirror.bsh script so repos are re-cloned
+				when and update has been made on the corresponding repo on the
+				primary system.
+
+                        Installations:
+                                iTRC Application(s) (Repeat for each iTRC app.)
+					iTRC devices - Envs (dev, QA, Int, Stage, Prod)
+				EMM Versioning System
+					emmutl-po-7p.sys.comcast.net - Prod
+					cmputl-ch2-4p.sys.comcast.net - Prod
+
+			Access - CADA Host groups
+				emmutl-po-7p.sys.comcsat.net
+				cmputl-ch2-4p.sys.comcast.net
+
+			Change Records/Bugs/Defects:
+				None identified.
+
+			Known Issues/Plans:
+				A) Full Backups for recovery of objects that have been removed
+				   also needed for weekly, for four weeks, and monthly for one
+				   year.
+				B) Testing and validation of branching and merging as
+				   described in the user guide.
+				C) Need to create/test build/deployment automation. Study and
+				   come up to speed on RPM.
+				D) Need to update and test for handling module and sub-modules.
+				E) Need to incorporate usage of getopts for managing script
+				   arguments.
+				F) Utilities Under consideration - documentation via
+				     git-scm.com/docs/git-[gc|repack|bundle])
+				   git-gc(1)
+				     Cleanup unnecessary files and optimize the local repository.
+				   git-repack(1)
+				     Pack unpacked objects in a repository.
+				   git-bundle(1)
+				     Move objects and refs by archive - Considering this for
+				     backups to be held for 3 days, 4 weekly's, and Monthly backups
+				     to be held for 1 year.
+
+			Enhancements:
+				None identified.
+
+			New Features:
+				None identified.
+
 2014-09-11	v1.1		Build: CFX-EMM-GITSystem_1_1
 
 			Description:
