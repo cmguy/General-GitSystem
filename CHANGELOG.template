@@ -1,0 +1,81 @@
+YYYY-MM-DD      v1.0            Build ID: [Unique build id sheme] or [repo/module name]_M_m_d_t
+
+                        Description:
+				This template identifies the format of a CHANGE log entry for a
+				single EM&M repo. The text in this Description and component fields
+				defined below should be replaced accordingly for the project this
+				template is being used for.
+				
+				A CHANGE log entry is added to the top of the CHANGELOG file each
+				time a new release of the repo is constructed.
+
+				The first line consists of the Date (YYYY-MM-DD), tab, repo release
+				tag (v with Major.Minor increments from previous repo release tag),
+				tab, and Build ID:, uniquely identifies the build that rolled up
+				for this repo release tag.
+					NOTES:
+					1.	The date is the appropriate Target Release Date (TRD)
+						until the "Go No Go" meeting.
+						It is assigned the date of production deployment when
+						identified in the "Go No Go" meeting.
+					2.	EBF or hotfixes are identified in the repo with a
+						third increment.  For example, for repo release tag
+						v.11.2.10, 10 would indicate the 10th hotfix or EBF
+						for release v.11.2. "0" or "null" is not counted.
+					3.	For Build ID:, Unique build id scheme not fully
+					        defined. Will likely utilize Git SHA-1 hash and/or
+						build time stamp. Current available alternate is
+						Module release ID tracked in JIRA record summary
+						field. Module ID tag increments are M=Major, m=minor,
+						d=development, t=test.
+
+				The components of this change log entry for a given release (i.e.,
+				Description, Comcast System Indexes, Latest Production and 
+				Development Dependencies, Change Records/Bugs/Defects,
+				Known Issues, Enhancements, New Features) all start with an entry
+				of "None identified". As the release progresses and is prepared,
+				this record is updated by all team members as required. It is
+				verified by CM prior to QA installations. It is reviewed during the
+				EMM release "Go No Go" meeting when identified for production
+				deployment. It is reviewed and completed with the production
+				deployment is completed and verified.
+				
+				In the event of an EBF or hotfix, this record is required. The
+				entries in the component fields of this record need to identify the
+				change for future audit references.
+
+				Examples of a CHANGELOGs:
+					For the gitolite project at github, refer to URL
+					https://github.com/sitaramc/gitolite/.
+
+					Refer to the CFX-EMM-GITSystem.git repo at URL
+					http://emm-git1.sys.comcst.net/git/
+
+                        Comcast System Indexes:
+			        iTRC Application(s) (Repeat for each iTRC app.)
+					iTRC devices - Envs (dev, QA, Int, Stage, Prod)
+		                None identified.
+		                        None identified - None identified
+	                        CADA Host groups - (access)
+	                                None identified.
+
+			Latest Production Dependencies
+				Deployable  Release [Year]/[Month]-[A|B]
+	                                None identified.
+				
+			Latest Development Dependencies
+				Deployable after Release [Year]/[Month]-[A|B]
+	                                None identified.
+
+			Change Records/Bugs/Defects:
+		        	None identified.
+
+			Known Issues/Plans:
+		        	None identified.
+
+			Enhancements:
+		        	None identified.
+
+			New Features:
+				None identified.
+
