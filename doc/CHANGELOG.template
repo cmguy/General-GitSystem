@@ -30,14 +30,15 @@ YYYY-MM-DD      v1.0            Build ID: [Unique build id sheme] or [repo/modul
 						d=development, t=test.
 
 				The components of this change log entry for a given release (i.e.,
-				Description, Installations, Access, Change Records/Bugs/Defects,
+				Description, Comcast System Indexes, Latest Production and 
+				Development Dependencies, Change Records/Bugs/Defects,
 				Known Issues, Enhancements, New Features) all start with an entry
 				of "None identified". As the release progresses and is prepared,
 				this record is updated by all team members as required. It is
-				verified by CM when QA installations are performed. It is
-				reviewed during the EMM release "Go No Go" meeting when identified
-				for production deployment. It is reviewed and completed with the
-				production deployment is completed and verified.
+				verified by CM prior to QA installations. It is reviewed during the
+				EMM release "Go No Go" meeting when identified for production
+				deployment. It is reviewed and completed with the production
+				deployment is completed and verified.
 				
 				In the event of an EBF or hotfix, this record is required. The
 				entries in the component fields of this record need to identify the
@@ -50,14 +51,21 @@ YYYY-MM-DD      v1.0            Build ID: [Unique build id sheme] or [repo/modul
 					Refer to the CFX-EMM-GITSystem.git repo at URL
 					http://emm-git1.sys.comcst.net/git/
 
-                        Installations:
+                        Comcast System Indexes:
 			        iTRC Application(s) (Repeat for each iTRC app.)
 					iTRC devices - Envs (dev, QA, Int, Stage, Prod)
 		                None identified.
 		                        None identified - None identified
+	                        CADA Host groups - (access)
+	                                None identified.
 
-	                Access - CADA Host groups
-	                        None identified.
+			Latest Production Dependencies
+				Deployable  Release [Year]/[Month]-[A|B]
+	                                None identified.
+				
+			Latest Development Dependencies
+				Deployable after Release [Year]/[Month]-[A|B]
+	                                None identified.
 
 			Change Records/Bugs/Defects:
 		        	None identified.
