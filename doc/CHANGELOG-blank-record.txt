@@ -1,0 +1,33 @@
+YYYY-MM-DD      v1.0            Build ID: [Unique build id sheme] or [repo/module name]_M_m_d_t
+
+                        Description:
+		        	None identified.
+
+                        Comcast System Indices:
+			        iTRC Application(s) (Repeat for each iTRC app.)
+					iTRC devices - Envs (dev, QA, Int, Stage, Prod)
+		                None identified.
+		                        None identified - None identified
+	                        CADA Host groups - (access)
+	                                None identified.
+
+			Latest Production Dependencies
+				Deployable  Release [Year]/[Month]-[A|B]
+	                                None identified.
+				
+			Latest Development Dependencies
+				Deployable after Release [Year]/[Month]-[A|B]
+	                                None identified.
+
+			Change Records/Bugs/Defects:
+		        	None identified.
+
+			Known Issues/Plans:
+		        	None identified.
+
+			Enhancements:
+		        	None identified.
+
+			New Features:
+				None identified.
+
