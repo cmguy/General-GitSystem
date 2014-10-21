@@ -1,4 +1,3 @@
 # Execute EMM gitsys-failover-mirror.bsh
-# Executes 15 and 30 minutes for hours 9am thru 5pm Mon thru Fri MDT
-# or 8am thru 4pm Mon thru Fri MST. This system is in Chicago on UTC time.
-15,30 14-22 * * 1-5 /home/git/bin/gitsys-failover-mirror.bsh >/dev/null 2>&1
+# Executes every hour plus 10 minutes Mon thru Sun every day of the year. 
+10 * * * * /home/git/bin/gitsys-failover-mirror.bsh >/dev/null 2>&1
