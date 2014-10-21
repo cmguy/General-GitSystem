@@ -2,7 +2,7 @@
 ################################################################################
 # gitsys-failover-mirror.bsh
 #
-#  Written by Andy Wallace 08/29/14
+#  Written by Andy Wallace 10/02/14
 #
 #  Purpose:
 #
@@ -15,8 +15,9 @@
 #  There are two main loop runs:
 #  - Difference between the primary and fail-over server repo lists. This
 #    identifies new repos to "git clone" from primary to the fail-over server.
-#  - List of repos on the fail-over server. This list is used to "git fetch"
-#    from the primary to the fail-over server.
+#  - List of repos that have been updated on the primary server since the 
+#    last time this script ran. This list is used to "git clone" from the
+#    primary to the fail-over server.
 #
 #  Dependencies:
 #
@@ -55,10 +56,10 @@
 #                  Get failover repo list ...                  
 #                  Get primary repo list ...                  
 #                  git clone new repos since last run ... (diff of log files)
-#                  git clone repo [repo name]
+#                  git clone --mirror [repo name]
 #                  ...
-#                  git fetch all repos...  (all repos on fail-over server)
-#                  git fetch repo [repo name] 
+#                  git clone updated repos since last run ... 
+#                  git clone --mirror [repo name] 
 #                  [End Message]
 #            If there are any other messages, they well be warnings or failures
 #            that need to be investigated. Most likely the "Finalize DevLead
@@ -84,13 +85,21 @@
 #
 #     .failoverRepos
 #           List of git repos on the failover server before backup and restore.
-#           Used to create failoverRepos_[YYYY-MM-DD]_[HH:MM:SS] just before
-#           repo fetch sequence.
+#           Used to create failoverRepos_[YYYY-MM-DD]_[HH:MM:SS].
 #
 #     .primaryRepos
 #           List of git repos on the primary server before backup and restore.
-#           Used to create primaryRepos_[YYYY-MM-DD]_[HH:MM:SS] just before
-#           repo fetch sequence.
+#           Used to create primaryRepos_[YYYY-MM-DD]_[HH:MM:SS].
+#
+#     .updatedRepos
+#           List of git repos on the primary server that have been updated 
+#           on this fail-over server since the last run of this script. Used to
+#           create updatedRepos_[YYYY-MM-DD]_[HH:MM:SS].
+#
+#     .AllupdatedRepos
+#          List of all git repos updated on the Primary server since the 
+#          previous run of this script. Used to create
+#          AllUpdatedRepos_[YYYY-MM-DD]_[HH:MM:SS].
 #
 #     .running.log
 #           Logfile while script is in progress. "tail -f" for current status.
@@ -223,6 +232,7 @@ if [ "$#" -eq "1" ]; then
    fi
 fi
 
+
 # Copy primary projects.list to fail-over server.
 scp -q -i /home/git/.ssh/gl-trans/cmadmin cmadmin@$PrimarySSHalias:$RepoList $RepoList > /dev/null 2>> $LogDIR/.running.log
 
@@ -236,15 +246,20 @@ ssh -n -i /home/git/.ssh/gl-trans/cmadmin cmadmin@$PrimarySSHalias ls -F $Primar
 sort $LogDIR/.primaryRepos_running >> $LogDIR/.primaryRepos_running-sorted
 
 echo "git clone new repos since last run..." >> $LogDIR/.running.log 2>&1
+if [ "$1" == "-v" ]; then
+echo "git clone new repos since last run...";
+fi
 cd $FailOverRepoDIR;
 diff $LogDIR/.failoverRepos_running-sorted $LogDIR/.primaryRepos_running-sorted | egrep '^>' |
    while read x f; do
       f=`echo ${f%/}`
       if [ "$1" == "-v" ]; then
-         echo "git clone repo " $f;
+         echo "git clone --mirror " $f;
       fi
-      echo "git clone repo " $f >> $LogDIR/.running.log 2>&1
-      git clone --bare --mirror $PrimarySSHalias:$f 2> /dev/null >> $LogDIR/.running.log
+      echo "git clone --mirror " $f >> $LogDIR/.running.log 2>&1
+      git clone --mirror $PrimarySSHalias:$f 2> /dev/null >> $LogDIR/.running.log
+      ssh -n -i /home/git/.ssh/gl-trans/cmadmin cmadmin@$PrimarySSHalias stat $PrimaryRepoDIR/$f/objects 2> /dev/null |egrep Modify >$FailOverRepoDIR/$f/lastmod
+      cp $FailOverRepoDIR/$f/lastmod $FailOverRepoDIR/$f/lastmodchk;
       scp -q -i /home/git/.ssh/gl-trans/cmadmin cmadmin@$PrimarySSHalias:$PrimaryRepoDIR/$f/$Var1Gitweb $FailOverRepoDIR/$f/$Var1Gitweb > /dev/null 2>> $LogDIR/.running.log
       scp -q -i /home/git/.ssh/gl-trans/cmadmin cmadmin@$PrimarySSHalias:$PrimaryRepoDIR/$f/$Var2Gitweb $FailOverRepoDIR/$f/$Var2Gitweb > /dev/null 2>> $LogDIR/.running.log
       scp -q -i /home/git/.ssh/gl-trans/cmadmin cmadmin@$PrimarySSHalias:$PrimaryRepoDIR/$f/$Var1gitolite $FailOverRepoDIR/$f/$Var1gitolite > /dev/null 2>> $LogDIR/.running.log
@@ -252,26 +267,40 @@ diff $LogDIR/.failoverRepos_running-sorted $LogDIR/.primaryRepos_running-sorted 
       scp -q -i /home/git/.ssh/gl-trans/cmadmin cmadmin@$PrimarySSHalias:$PrimaryRepoDIR/$f/$Var3gitolite $FailOverRepoDIR/$f/$Var3gitolite > /dev/null 2>> $LogDIR/.running.log
    done
 
+echo "git clone updated repos since last run..." >> $LogDIR/.running.log 2>&1
+if [ "$1" == "-v" ]; then
+   echo "git clone updated repos since last run...";
+fi
+cat $LogDIR/.failoverRepos_running-sorted | egrep '.git/' |
+### Need to exclude gitolite-admin.git
+   while read x f; do
+      if [ $x != "gitolite-admin.git/" ]; then
+         x=`echo ${x%/}`;
+         cp $FailOverRepoDIR/$x/lastmod $FailOverRepoDIR/$x/lastmodchk;
+         ssh -n -i /home/git/.ssh/gl-trans/cmadmin cmadmin@$PrimarySSHalias stat $PrimaryRepoDIR/$x/objects 2> /dev/null |egrep Modify >$PrimaryRepoDIR/$x/lastmod
+         if [ "$(cat $FailOverRepoDIR/$x/lastmod | sha256sum)" != "$(cat $FailOverRepoDIR/$x/lastmodchk | sha256sum)" ]; then
+            cp $FailOverRepoDIR/$x/lastmod $FailOverRepoDIR/lastmod;
+            rm -fr $FailOverRepoDIR/$x;
+            cd $FailOverRepoDIR;
+            if [ "$1" == "-v" ]; then
+              echo "git clone --mirror " $x;
+            fi
+            echo "git clone --mirror " $x >> $LogDIR/.running.log 2>&1
+            git clone --mirror $PrimarySSHalias:$x 2> /dev/null >> $LogDIR/.running.log
+            scp -q -i /home/git/.ssh/gl-trans/cmadmin cmadmin@$PrimarySSHalias:$PrimaryRepoDIR/$x/$Var1Gitweb $FailOverRepoDIR/$x/$Var1Gitweb > /dev/null 2>> $LogDIR/.running.log
+            scp -q -i /home/git/.ssh/gl-trans/cmadmin cmadmin@$PrimarySSHalias:$PrimaryRepoDIR/$x/$Var2Gitweb $FailOverRepoDIR/$x/$Var2Gitweb > /dev/null 2>> $LogDIR/.running.log
+            scp -q -i /home/git/.ssh/gl-trans/cmadmin cmadmin@$PrimarySSHalias:$PrimaryRepoDIR/$x/$Var1gitolite $FailOverRepoDIR/$x/$Var1gitolite > /dev/null 2>> $LogDIR/.running.log
+            scp -q -i /home/git/.ssh/gl-trans/cmadmin cmadmin@$PrimarySSHalias:$PrimaryRepoDIR/$x/$Var2gitolite $FailOverRepoDIR/$x/$Var2gitolite > /dev/null 2>> $LogDIR/.running.log
+            scp -q -i /home/git/.ssh/gl-trans/cmadmin cmadmin@$PrimarySSHalias:$PrimaryRepoDIR/$x/$Var3gitolite $FailOverRepoDIR/$x/$Var3gitolite > /dev/null 2>> $LogDIR/.running.log
+            mv $FailOverRepoDIR/lastmod $FailOverRepoDIR/$x/lastmod;
+            cp $FailOverRepoDIR/$x/lastmod $FailOverRepoDIR/$x/lastmodchk;
+         fi
+      fi
+   done
+
 # Create and date/time stamp log files for Failover and primmary server repos.
 mv $LogDIR/.failoverRepos_running-sorted  $LogDIR/failoverRepos_`date +%F`_`date +%R`:`date +%S`
 mv $LogDIR/.primaryRepos_running-sorted  $LogDIR/primaryRepos_`date +%F`_`date +%R`:`date +%S`
-
-echo "git fetch all repos..." >> $LogDIR/.running.log 2>&1
-cd $FailOverRepoDIR;
-for f in */.; do
-   f=`echo ${f%/.}`
-   if [ "$1" == "-v" ]; then
-      echo "git fetch repo " $f;
-   fi
-   cd $FailOverRepoDIR/$f;
-   echo "git fetch repo " $f >> $LogDIR/.running.log 2>&1
-   git fetch --all 2>> $LogDIR/.running.log
-   scp -q -i /home/git/.ssh/gl-trans/cmadmin cmadmin@$PrimarySSHalias:$PrimaryRepoDIR/$f/$Var1Gitweb $FailOverRepoDIR/$f/$Var1Gitweb > /dev/null 2>> $LogDIR/.running.log
-   scp -q -i /home/git/.ssh/gl-trans/cmadmin cmadmin@$PrimarySSHalias:$PrimaryRepoDIR/$f/$Var2Gitweb $FailOverRepoDIR/$f/$Var2Gitweb > /dev/null 2>> $LogDIR/.running.log
-   scp -q -i /home/git/.ssh/gl-trans/cmadmin cmadmin@$PrimarySSHalias:$PrimaryRepoDIR/$f/$Var1gitolite $FailOverRepoDIR/$f/$Var1gitolite > /dev/null 2>> $LogDIR/.running.log
-   scp -q -i /home/git/.ssh/gl-trans/cmadmin cmadmin@$PrimarySSHalias:$PrimaryRepoDIR/$f/$Var2gitolite $FailOverRepoDIR/$f/$Var2gitolite > /dev/null 2>> $LogDIR/.running.log
-   scp -q -i /home/git/.ssh/gl-trans/cmadmin cmadmin@$PrimarySSHalias:$PrimaryRepoDIR/$f/$Var3gitolite $FailOverRepoDIR/$f/$Var3gitolite > /dev/null 2>> $LogDIR/.running.log
-done
 
 echo "`date +%c` EMM Git System Primary to failover Backup run complete." >> $LogDIR/.running.log 2>&1
 mv $LogDIR/.running.log $LogFile-`date +%F`_`date +%R`:`date +%S`.log
