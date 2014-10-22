@@ -2,7 +2,7 @@
 ################################################################################
 # gitsys-failover-mirror.bsh
 #
-#  Written by Andy Wallace 10/02/14
+#  Written by Andy Wallace 10/21/14
 #
 #  Purpose:
 #
@@ -39,7 +39,7 @@
 #  Usage and Monitoring 
 #    Designed to run from git crontab on the EM&M Git Repository fail-over
 #    server. For trouble shooting, verbose argument is available adding more to
-#    the log file (reference variable GitBackupLog).
+#    the standard out (reference variable GitBackupLog).
 #      $ gitsystem-backup.bsh [-v]
 #
 #    Resulting run log files should be reviewed daily to:
@@ -63,7 +63,7 @@
 #                  [End Message]
 #            If there are any other messages, they well be warnings or failures
 #            that need to be investigated. Most likely the "Finalize DevLead
-#            Repo" procedure in the "Git Repo System Admin Guide" was not
+#            Repo" procedure in the "Git Repo System Admin Guide" was no 
 #            followed correctly or needs to be adjusted.
 #
 #            The difference between the date/time stamp of this log file and the

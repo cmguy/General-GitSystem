@@ -1,34 +1,41 @@
-2014-10-??      v1.3            Build: CFX-EMM-GITSystem_1_3
+2014-10-22      v1.3            Build: CFX-EMM-GITSystem-M-1.3-0
 
-                         Description:
+			Description:
 			 	Corrected Access - CADA Host group entry.
-																									                           Installations:
+
+				Updates to branch definitions. Added powerpoint and visio
+				documents for presentations and meetings. Also added file
+				CHANGELOG-blank-record.txt. Updated Admin and User guides
+				accordingly.
+
+				Corrected outstanding issues with with gitsys-failover-mirror.bsh
+				script. First run started 2014-10-21_15:10:00. (9:10 AM MDT)
+
+			Dependencies:
+				Comcast System Indices
                                 iTRC Application(s) (Repeat for each iTRC app.)
 	                                iTRC devices - Envs (dev, QA, Int, Stage, Prod)
                                 EMM Versioning System
                                         emmutl-po-7p.sys.comcast.net - Prod
                                         cmputl-ch2-4p.sys.comcast.net - Prod
+                         	Access - CADA Host groups
+			 		SEO_Unix_CEMP_CM
 
-                         Access - CADA Host groups
-			 	SEO_Unix_CEMP_CM
-
-                         Change Records/Bugs/Defects:
-                                None identified.
-
-                         Known Issues/Plans:
-			        A) Failover backup still has issues and needs to be added to the
-				   git crontab on the failover server.
-                                B) Full Backups for recovery of objects that have been removed
+			Change Records/Bugs/Defects:
+				None identified.
+ 
+			Known Issues/Plans:
+                                A) Full Backups for recovery of objects that have been removed
                                    also needed for weekly, for four weeks, and monthly for one
                                    year.
-                                C) Testing and validation of branching and merging as
+                                B) Testing and validation of branching and merging as
                                    described in the user guide.
-                                D) Need to create/test build/deployment automation. Study and
+                                C) Need to create/test build/deployment automation. Study and
                                    come up to speed on RPM.
-                                E) Need to update and test for handling module and sub-modules.
-                                F) Need to incorporate usage of getopts for managing script
+                                D) Need to update and test for handling module and sub-modules.
+                                E) Need to incorporate usage of getopts for managing script
                                    arguments.
-                                G) Utilities Under consideration - documentation via
+                                F) Utilities Under consideration - documentation via
                                    git-scm.com/docs/git-[gc|repack|bundle])
                                    git-gc(1)
                                    Cleanup unnecessary files and optimize the local repository.
@@ -39,7 +46,7 @@
                                    backups to be held for 3 days, 4 weekly's, and Monthly backups
                                    to be held for 1 year.
 
-                        Enhancements:
+			Enhancements:
 
 2014-10-16	v1.2		Build: CFX-EMM-GITSystem_1_2
 
@@ -51,8 +58,8 @@
 				sudo to root for all anticipated apache maintenance. Admin guide
 				updated accordingly.
 
-				Added CHANGELOG component fields Installations and Access to track
-				iTRC applications, devices, and CADA Host groups for EM&M git repos.
+				Added CHANGELOG component fields for Dependencies to track iTRC
+				applications, devices, and CADA Host groups for EM&M git repos.
 
 				Upgraded workstation Git for windows from June 11th release to 
 				September 29th release.
@@ -61,16 +68,14 @@
 				when and update has been made on the corresponding repo on the
 				primary system.
 
-                        Installations:
+                        Dependencies:
                                 iTRC Application(s) (Repeat for each iTRC app.)
 					iTRC devices - Envs (dev, QA, Int, Stage, Prod)
 				EMM Versioning System
 					emmutl-po-7p.sys.comcast.net - Prod
 					cmputl-ch2-4p.sys.comcast.net - Prod
-
-			Access - CADA Host groups
-				emmutl-po-7p.sys.comcsat.net
-				cmputl-ch2-4p.sys.comcast.net
+				Access - CADA Host groups
+			 		SEO_Unix_CEMP_CM
 
 			Change Records/Bugs/Defects:
 				None identified.
@@ -99,7 +104,6 @@
 
 			Enhancements:
 				None identified.
-
 			New Features:
 				None identified.
 

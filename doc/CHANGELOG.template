@@ -1,6 +1,6 @@
-YYYY-MM-DD      v1.0            Build ID: [Unique build id sheme] or [repo/module name]_M_m_d_t
+YYYY-MM-DD      vM.m            Build ID: [repo]-[branch]-[deployment]-[build#]
 
-                        Description:
+			Description:
 				This template identifies the format of a CHANGE log entry for a
 				single EM&M repo. The text in this Description and component fields
 				defined below should be replaced accordingly for the project this
@@ -13,21 +13,18 @@ YYYY-MM-DD      v1.0            Build ID: [Unique build id sheme] or [repo/modul
 				tag (v with Major.Minor increments from previous repo release tag),
 				tab, and Build ID:, uniquely identifies the build that rolled up
 				for this repo release tag.
-					NOTES:
-					1.	The date is the appropriate Target Release Date (TRD)
-						until the "Go No Go" meeting.
-						It is assigned the date of production deployment when
-						identified in the "Go No Go" meeting.
-					2.	EBF or hotfixes are identified in the repo with a
-						third increment.  For example, for repo release tag
-						v.11.2.10, 10 would indicate the 10th hotfix or EBF
-						for release v.11.2. "0" or "null" is not counted.
-					3.	For Build ID:, Unique build id scheme not fully
-					        defined. Will likely utilize Git SHA-1 hash and/or
-						build time stamp. Current available alternate is
-						Module release ID tracked in JIRA record summary
-						field. Module ID tag increments are M=Major, m=minor,
-						d=development, t=test.
+				NOTES:
+				1. The date is the appropriate Target Release Date (TRD) until the
+				"Go No Go" meeting. It is assigned the date of production
+				deployment when identified in the "Go No Go" meeting.
+				2. Hotfixes are identified in the repo with a third
+				increment. For example, for repo release tag v.11.2.10, 10 would
+				indicate the 10th hotfix or EBF for release v.11.2. "0" or "null"
+				is not counted.
+				3. For Build ID:, Unique build id scheme has been proposed to
+				development. Current available alternate is Module release ID
+				tracked in JIRA record summary field. Module ID tag increments are
+				M=Major, m=minor, d=development, t=test.
 
 				The components of this change log entry for a given release (i.e.,
 				Description, Comcast System Indexes, Latest Production and 
@@ -40,9 +37,9 @@ YYYY-MM-DD      v1.0            Build ID: [Unique build id sheme] or [repo/modul
 				deployment. It is reviewed and completed with the production
 				deployment is completed and verified.
 				
-				In the event of an EBF or hotfix, this record is required. The
-				entries in the component fields of this record need to identify the
-				change for future audit references.
+				In the event of a hotfix, this record is required. The entries in
+				the component fields of this record need to identify the change
+				for future audit references.
 
 				Examples of a CHANGELOGs:
 					For the gitolite project at github, refer to URL
@@ -51,7 +48,8 @@ YYYY-MM-DD      v1.0            Build ID: [Unique build id sheme] or [repo/modul
 					Refer to the CFX-EMM-GITSystem.git repo at URL
 					http://emm-git1.sys.comcst.net/git/
 
-                        Comcast System Indexes:
+			Dependencies:
+                        	Comcast System Indices:
 			        iTRC Application(s) (Repeat for each iTRC app.)
 					iTRC devices - Envs (dev, QA, Int, Stage, Prod)
 		                None identified.
@@ -59,12 +57,12 @@ YYYY-MM-DD      v1.0            Build ID: [Unique build id sheme] or [repo/modul
 	                        CADA Host groups - (access)
 	                                None identified.
 
-			Latest Production Dependencies
-				Deployable  Release [Year]/[Month]-[A|B]
+				Latest Production Dependencies
+				Deployable for release YYYYMM-[A|B|OC] or hotfix-YYYYMMDD
 	                                None identified.
 				
-			Latest Development Dependencies
-				Deployable after Release [Year]/[Month]-[A|B]
+				Latest Development Dependencies
+				Deployable after release YYYYMM-[A|B|OC] or hotfix-YYYYMMDD
 	                                None identified.
 
 			Change Records/Bugs/Defects:
