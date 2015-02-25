@@ -81,21 +81,25 @@
 			<div class="content-middle">
 				<p>Welcome to the Event Management & Mediation (EM&M) Repository System. This system is based on the <a href="http://git-scm.com">Git</a> distributed version control system. It is managed with <a href="http://gitolite.com/gitolite/index.html">Gitolite</a>.</p>
                  <p>This repository system encompasses two servers, this <b><font color="#ff0000">fail-over</font></b > server and an <a href="http://emm-git1.sys.comcast.net/"><b><font color="#00FF00">primary</font></b></a> server.</p>
-				<p><b>NOTE:</b> This server is read-only, updated daily (M-F), with a backup/restore from the EMM Git1 server.</p>
+				<p><b>NOTE:</b> This server is read-only, updated hourly, with mirroring from the EMM Git1 server.</p>
 			</div>
 <hr />
 			<div class="content-columns">
 				<div class="content-column-left">
-					<h2>If you are new to Git:</h2>
+					<h2>Training and Documentation</h2>
 
-					<p>The official Git site is <a href="http://git-scm.com">git-scm.com</a>, cover chapters 2 and 3 at minimum under the Documentation link. Another good source for Git usage and introductions is <a href="http://gitolite.com/index2.html">Notes on Git</a>. Your EM&M Configuration Management team also maintains the <a href="CEMP-227392710-221014-1457-6.pdf">EM&M Git Users Guide</a>. In order to deliver EM&M deployments, you'll need to follow this user guide.</p>
-
-					<h2>Deployment WorkFlow and Documentation</h2>
-					<p>The development work you do for EM&M is managed with Change Records (CR)s. These CRs come in the form of Service Requests (SR00NNNNNN) which are opened for production problems in a Remedy system, User Stories (USNNNNNN) which are managed in the Rally system, and legacy Change Records (CR-NNNN) which are managed with an EM&M Sharepoint site.</p>
-					<p>EM&M Git repos are application modules that are maintained by developers in development environments for promotion to all other EM&M environments (QA, Test labs, Production). These promotions are done through this repository system, managed by the EM&M CM and EPA teams per instructions provided by development.</p>
-					<p>EM&M Deployments are managed with the <a href="http://tkts.sys.comcast.net/browse/CEMPCM">JIRA CEMPCM project</a> where CRs and Git repos are associated in the titles (summaries) of each JIRA CEMPCM project ticket. A <a href="http://tkts.sys.comcast.net/secure/Dashboard.jspa?selectPageId=15010">Dev Queue dashboard</a> is available for EM&M developers to manage their work.</p>
-					<p>A <a href="https://wiki.io.comcast.net/dashboard.action">Comcast wiki</a> maintained with <a href="https://www.atlassian.com/software/confluence">Confluence</a> is utilized for EM&M documentation. A <a href="https://wiki.io.comcast.net/display/CEMP/Home">EM&M CM Portal</a> is maintained to provide a view to all things Comcast EM&M including legacy cemp, Comcast services, and other documentation locations.</p>
-				</div>
+					<p>The following training presentations are maintained:
+                                        <ul>                                        <li><a href="EMM_GitSystem_Training.pptx">EMM_Git_System_Training</a>
+                                                                                <li><a href="EMM_GitSystem.pptx">EMM_Git_System</a>
+                                                                                                                        </ul>                                        The following Documents are maintained for this EM&M Git System: (followed by local pdf format option)
+                                                                                                                                                                <ul>                                        <li><a href="https://wiki.io.comcast.net/display/CEMP/Git+Executive+Overview">EMM Git Executive Overview</a> - <a href="EMM-GitExecutiveOverview.pdf">pdf</a>                                        <li><a href="https://wiki.io.comcast.net/display/CEMP/Git+Installation+Procedure">Git Installation Procedure</a> - <a href="EMM-GitInstallationProcedure.pdf">pdf</a>                                        <li><a href="https://wiki.io.comcast.net/pages/viewpage.action?pageId=227392710">EMM Git User Guide</a> - <a href="EMM-GitUsersGuide.pdf">pdf</a>                                        <li><a href="https://wiki.io.comcast.net/display/CEMP/Version+Management+Implementation">Version Management Implementation</a> - <a href="EMM-VersionManagementImplementation.pdf">pdf</a>
+                                                                                                                                                                                                        </ul></p>
+					<h2>Code and Deployment Workflow</h2>
+				 	<p>Development work for EM&M is initiated with Change Records (CR)s. These CRs come in the form of EMM Operations support tickets (EMMLSUP-NNNN), production problems tracked in JIRA project <a href="http://tkts.sys.comcast.net/browse/EMMLSUP">EMM Operations</a>, User Stories (USNNNNNN) which are managed in the Rally system, and legacy Change Records (CR-NNNN) which are managed with an EM&M Sharepoint site. Coordination of module development and deployment is managed with <a href="http://tkts.sys.comcast.net/browse/CEMPCM">JIRA CEMPCM Project</a> tickets.</p>
+				        <p><a href="http://emm-git1.sys.comcast.net/git/">EM&M Git repos</a> are EM&M modules modified by developers in development environments for promotion to all other EM&M environments (QA, Integration, Stage, Production). This is the <a href="https://wiki.io.comcast.net/display/CEMP/JIRA+EM&M+Workflow#WorkFlow+Phases+by+Status+and+Process">JIRA EM&M Workflow</a>.</p>
+                                        <p>EM&M Deployments are managed using the <a href="http://tkts.sys.comcast.net/browse/CEMPCM">JIRA CEMPCM project</a> where CRs and Git repos are associated in the titles (summaries) of each JIRA CEMPCM project ticket. A <a href="http://tkts.sys.comcast.net/secure/Dashboard.jspa?selectPageId=15010">Dev Queue dashboard</a> is available for EM&M developers to manage their work.</p>
+                                        p>A <a href="https://wiki.io.comcast.net/dashboard.action">Comcast wiki</a> maintained with <a href="https://www.atlassian.com/software/confluence">Confluence</a> is utilized for EM&M documentation. A <a href="https://wiki.io.comcast.net/display/CEMP/Home">EM&M CM Portal</a> is maintained to provide a view to all things Comcast EM&M including legacy cemp, Comcast services, and other documentation locations.</p>
+			        </div>
 
 				<div class="content-column-right">
 					<h2>Support</h2>
@@ -111,7 +115,8 @@
 					<p>In addition to being the "fail-over" server, upgrades, fixes, and other testing activities occur on this server. For these reasons, access may be limited on this server.</p>
 					<h2>Primary Software of this System</h2>
 
-					<p>For details of this EM&M system, refer to the <a href="CEMP-GitRepoSystemAdminGuide-221014-1423-4.pdf">Git Repo System Admin Guide</a>.</p>
+ 					<p>For administrative details of this EM&M system, refer to the:</p>
+				    	<p><a href="https://wiki.io.comcast.net/display/CEMP/Git+Repo+System+Admin+Guide">Git Repo System Admin Guide</a> - <a href="EMM-GitRepSystemAdminGuide.pdf">pdf</a></p>
 
 						<p>Following are links to the websites of the primary software installed on this system:</p>
 
@@ -119,14 +124,5 @@
 				</div>
 			</div>
 		</div>
-	<div class="content">
-	<div class="content-middle"><h2>About Git:</h2><p>Git is a distributed revision control and source code management (SCM) system with an emphasis on speed, data integrity,and support for distributed, non-linear workflows. Git was initially designed and developed by Linus Torvalds for Linux kernel development in 2005, and has since become the most widely adopted version control system for software development.</p>
-<p>As with most other distributed revision control systems, and unlike most client-server systems, every Git working directory is a full-fledged repository with complete history and full version tracking capabilities, independent of network access or a central server. Like the Linux kernel, Git is free software distributed under the terms of the GNU General Public License version 2.</p>
-	</div>
-	<div class="content-middle"><h2>About Apache:</h2><p>The Apache HTTP Server Project is an effort to develop and maintain an open-source HTTP server for modern operating systems including UNIX and Windows NT. The goal of this project is to provide a secure, efficient and extensible server that provides HTTP services in sync with the current HTTP standards.</p>
-	</div>
-	<div class="content-middle"><h2>About CentOS:</h2><b>The Community ENTerprise Operating System</b> (CentOS) is an Enterprise-class Linux Distribution derived from sources freely provided to the public by a prominent North American Enterprise Linux vendor.  CentOS conforms fully with the upstream vendors redistribution policy and aims to be 100% binary compatible. (CentOS mainly changes packages to remove upstream vendor branding and artwork.)  The CentOS Project is the organization that builds CentOS.</p>
-	</div>
-	</div>
 </body>
 </html>

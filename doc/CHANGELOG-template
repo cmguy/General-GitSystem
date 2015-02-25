@@ -1,0 +1,38 @@
+YYYY-MM-DD      vM.m            Build ID: [repo]-[branch]-[deployment]-[build#]
+
+                        Description:
+		        	None identified
+
+                        Dependencies:
+				Comcast System Indices:
+			       	iTRC Application(s) (Repeat for each iTRC app.)
+					iTRC device FQDN - Envs (dev, QA, Int, Stage, Prod)
+		                None identified
+		                        None identified - None identified
+	                        CADA Host groups - (access)
+	                                None identified
+
+				Latest Production
+				Deployable for release-YYYYMM-[A|B|OC] or hotfix-YYYYMMDD
+	                                None identified
+				
+				Latest Development Dependencies
+				Deployable after release-YYYYMM-[A|B|OC] or hotfix-YYYYMMDD
+	                                None identified
+
+				Other Dependency
+	                                None identified
+
+			Change Records/Bugs/Defects:
+		        	None identified
+
+			Known Issues/Plans:
+		        	None identified
+
+			Enhancements:
+		        	None identified
+
+			New Features:
+				None identified
+
+
