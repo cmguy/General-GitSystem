@@ -1,13 +1,13 @@
 #################################################################
 #################################################################
 #################################################################
-### EMM Git System SSH Client Config file                     ###
+### Git System SSH Client Config file                         ###
 ###                                                           ###
-### This code block required for EEM Git user System Access   ###
+### This code block required for Git user System Access       ###
 ### between the primary and failover servers.                 ###
 ###                                                           ###
-### http://emm-git1.sys.comcast.net (primary server)          ###
-### http://emm-git2.sys.comcast.net (fail-over server)        ###
+### http://emm-git1.sys.co.net (primary server)               ###
+### http://emm-git2.sys.co.net (fail-over server)             ###
 ###                                                           ###
 ### This code block required for the system backup and        ###
 ### restore procedure from the primary to the failover        ###
@@ -22,13 +22,13 @@
 #################################################################
 Host emm-git primary
     User cmadmin
-    Hostname emm-git1.sys.comcast.net
+    Hostname emm-git1.sys.co.net
     Port 22
     IdentityFile ~/.ssh/cmadmin
 
 Host emm-gitA fail-over
     User cmadmin
-    Hostname emm-git2.sys.comcast.net
+    Hostname emm-git2.sys.co.net
     Port 22
     IdentityFile ~/.ssh/cmadmin
 #################################################################

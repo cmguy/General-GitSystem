@@ -7,7 +7,7 @@
 #  Purpose:
 #
 #  This script is designed to backup and restore the primary server to
-#  the failover server of the EMM Git Repo System. It is designed to run from the
+#  the failover server of the Git Repo System. It is designed to run from the
 #  failover server as the git userid using Git and Gitolite utilities.
 #
 #  Design
@@ -39,7 +39,7 @@
 #       pair setup in ~/.ssh for cmadmin and the cmadmin key par setup in
 #       ~/.ssh/gl-trans/cmadmin for the git user. This is required for the scp of
 #       the repo gitweb and gitolite configuration files.
-#    3. Crontab for ~/git on failover server of EMM Git System.
+#    3. Crontab for ~/git on failover server of Git System.
 #    4. Write/read access to server ~/log directory.
 #    5. cmadmin userid setup on primary and fail-over servers with ssh key separate 
 #       from gitolite control.
@@ -116,7 +116,7 @@
 #          ~/.ssh/config file.
 #
 #     GitBackupLog
-#          Path and filename of log for EMM Git System backups, this script.
+#          Path and filename of log for Git System backups, this script.
 #
 #     LogDIR
 #          Directory where this script logs to.
@@ -195,7 +195,7 @@ Var3gitolite="gl-perms"
 
 # Process script arguments
 if [ "$#" -eq "0" ]; then
-   echo "`date +%c` EMM Git System Primary to failover Backup run start." > $LogDIR/.running.log 2>&1
+   echo "`date +%c`Git System Primary to failover Backup run start." > $LogDIR/.running.log 2>&1
 elif [ "$#" -gt "1" ]; then
    echo ""
    echo "Invalid argument set. For help execute " $ThisScript " -h"
@@ -212,7 +212,7 @@ if [ "$#" -eq "1" ]; then
        echo "usage: $ThisScript [-v|-h]"
        echo ""
        echo "This script is designed to backup and restore the primary server to"
-       echo "the failover server of the EMM Git Repo System. It is designed to run from the"
+       echo "the failover server of the Git Repo System. It is designed to run from the"
        echo "failover server as the git userid using Git and Gitolite utilities."
        echo ""
        echo "Backups for recovery of objects that have been removed will also be maintained:"
@@ -280,7 +280,7 @@ for f in */.; do
    scp -q -i /home/git/.ssh/gl-trans/cmadmin cmadmin@$PrimarySSHalias:$PrimaryRepoDIR/$f/$Var3gitolite $FailOverRepoDIR/$f/$Var3gitolite > /dev/null 2>> $LogDIR/.running.log
 done
 
-echo "`date +%c` EMM Git System Primary to failover Backup run complete." >> $LogDIR/.running.log 2>&1
+echo "`date +%c` Git System Primary to failover Backup run complete." >> $LogDIR/.running.log 2>&1
 mv $LogDIR/.running.log $LogFile-`date +%F`_`date +%R`:`date +%S`.log
 
 exit 0

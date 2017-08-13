@@ -1,4 +1,4 @@
-This server has been setup as a EMM Git2 repository system server.
+This server has been setup as a Git2 repository system server.
 
 The Default directory /db/mysql is the top of the git repository. A link in /opt named
 git points to the mysql directory so the git repository access is /opt/git.
@@ -22,4 +22,4 @@ Please contact the EM&M organization under Bev Tucker before changing any of the
 
 Regards,
 
-Andy Wallace   (Andrew_Wallace@cable.comcast.com - 720-267-2677)
+Andy Wallace   (Andrew_Wallace@co.com - xxx-xxx-xxxx)
