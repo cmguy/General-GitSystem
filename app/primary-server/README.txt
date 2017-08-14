@@ -1,4 +1,4 @@
-This server has been setup as a EMM Git1 repository system server.
+This server has been setup as a Git1 repository system server.
 
 The Default directory /app/git-repos is the top of the git repository.
 
@@ -15,11 +15,11 @@ Since the git user access is gitolite controlled ssh sessions, the /etc/issue an
 files have been copied to "[filename]-orig" and updated.
 
 For more details on the administration of this system, refer to
-http://emm-git1.sys.comcast.net/.
+http://emm-git1.sys.co.net/.
 
 Please contact the EM&M organization under Bev Tucker before changing any of these settings.
 
 Regards,
 
-Andy Wallace   (Andrew_Wallace@cable.comcast.com - 720-267-2677)
+Andy Wallace   (Andrew_Wallace@co.com - xxx-xxx-xxxx)
 

@@ -1,4 +1,71 @@
-2014-10-22      v1.3            Build: CFX-EMM-GITSystem-M-1.3-0
+2017-08-12      v1.4            Build: General-GITSystem-D-1.4-0
+
+	Description:
+		This release generalized for open-source support. Not fully
+		tested. The current v1.4 is a system using gitolite with both
+		a primary and failover internal system.
+
+		Updated for Training sessions. There are three at this time:
+		- Git Installation Procedure - Confluence Wiki Document
+		- Git_System_Training.pptx - Powerpoint slide deck
+		- Git_System.pptx - Powerpoint slide deck
+
+		Includes updates made to gitolite configs and other
+		documentation as training was implemented, tested, and executed.
+
+		Updated primary and failover server apache index.html files for
+		all links needed for all thing Git System.
+		- Provides for pdf file links for documents maintained on the
+		  Confluence wiki that are required for general Git System
+		  operational support. This done for times there may be issues
+		  with the Confluence wiki
+
+		Added doc/.gitignore-example acquired from Jim Haun.
+
+		The doc/GIT-Training.pptx was acquired from Robert Galambos.
+
+		The doc/Branching-Merging-Workflow.vsd was created to
+		maintain all images related to the Branching and Merging
+		Workflow.
+
+		Dependencies:
+			Hardware System Indices
+                                CMHW Application(s) (Repeat for each CMHW app.)
+	                                CMHW device FQDN - Envs (dev, QA, Int, Stage, Prod)
+                                Versioning System
+                                        emmutl-po-7p.sys.co.net - Prod
+                                        cmputl-ch2-4p.sys.co.net - Prod
+                         	Access - CADA Host groups
+			 		SEO_Unix_CEMP_CM
+
+		Change Records/Bugs/Defects:
+			None identified.
+
+		Known Issues/Plans:
+			A) Full Backups for recovery of objects that have been removed
+		  	   also needed for weekly, for four weeks, and monthly for one year.
+			B) Testing and validation of branching and merging as described in
+			   the user guide.
+			C) Need to create/test build/deployment automation. Study and come
+			   up to speed on RPM.
+			D) Need to update and test for handling module and sub-modules.
+			   ***Currently not used***
+			E) Need to incorporate usage of getopts for managing script arguments.
+			F) Utilities Under consideration - documentation via
+                                   git-scm.com/docs/git-[gc|repack|bundle])
+                                   git-gc(1)
+                                   Cleanup unnecessary files and optimize the local repository.
+                                   git-repack(1)
+                                   Pack unpacked objects in a repository.
+                                   git-bundle(1)
+                                   Move objects and refs by archive - Considering this for
+                                   backups to be held for 3 days, 4 weekly's, and Monthly backups
+                                   to be held for 1 year.
+
+		Enhancements:
+			None identified.
+
+2014-10-22      v1.3            Build: GITSystem-M-1.3-0
 
 			Description:
 			 	Corrected Access - CADA Host group entry.
@@ -13,11 +80,11 @@
 
 			Dependencies:
 				Comcast System Indices
-                                iTRC Application(s) (Repeat for each iTRC app.)
-	                                iTRC devices - Envs (dev, QA, Int, Stage, Prod)
-                                EMM Versioning System
-                                        emmutl-po-7p.sys.comcast.net - Prod
-                                        cmputl-ch2-4p.sys.comcast.net - Prod
+                                CMHW Application(s) (Repeat for each CMHW app.)
+	                                CMHW device FQDN - Envs (dev, QA, Int, Stage, Prod)
+                                Versioning System
+                                        emmutl-po-7p.sys.co.net - Prod
+                                        cmputl-ch2-4p.sys.co.net - Prod
                          	Access - CADA Host groups
 			 		SEO_Unix_CEMP_CM
 
@@ -47,8 +114,9 @@
                                    to be held for 1 year.
 
 			Enhancements:
+				None identified.
 
-2014-10-16	v1.2		Build: CFX-EMM-GITSystem_1_2
+2014-10-16	v1.2		Build: GITSystem_1_2
 
 			Description:
 				Updated Admin and User guides for new user testing and usage. 
@@ -69,11 +137,11 @@
 				primary system.
 
                         Dependencies:
-                                iTRC Application(s) (Repeat for each iTRC app.)
-					iTRC devices - Envs (dev, QA, Int, Stage, Prod)
-				EMM Versioning System
-					emmutl-po-7p.sys.comcast.net - Prod
-					cmputl-ch2-4p.sys.comcast.net - Prod
+                                CMHW Application(s) (Repeat for each CMHW app.)
+					CMHW devices - Envs (dev, QA, Int, Stage, Prod)
+				Versioning System
+					emmutl-po-7p.sys.co.net - Prod
+					cmputl-ch2-4p.sys.co.net - Prod
 				Access - CADA Host groups
 			 		SEO_Unix_CEMP_CM
 
@@ -107,7 +175,7 @@
 			New Features:
 				None identified.
 
-2014-09-11	v1.1		Build: CFX-EMM-GITSystem_1_1
+2014-09-11	v1.1		Build: GITSystem_1_1
 
 			Description:
 			        Completed unit testing of gitsys-failover-mirror.bsh script. 
